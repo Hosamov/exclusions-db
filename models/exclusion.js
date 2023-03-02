@@ -16,6 +16,7 @@ const ExclusionSchema = new Schema({
   super_title: String, // Title of supervisor in signature
   archived: Boolean,
   canEdit: Boolean,
+  pending: Boolean,
 });
 
 module.exports = mongoose.model('Exclusion', ExclusionSchema, 'exclusions');

@@ -103,9 +103,14 @@ block content
         br
         input.form-control(type='hidden' name="id" id="id" value=`${id}`)  
         br
-        small * required
-        br 
-        br
+      fieldset
+        .radio-section
+          label.admin-form-label(name='is_active') Pending: 
+            input.admin-form-control(type='checkbox' name='is_active' checked=exclusion.pending) 
+
+      small * required
+      br 
+      br
       .form-button
         button.btn.btn-default(type='submit') Submit
         a(href=`/home/${exclusion.id}`)

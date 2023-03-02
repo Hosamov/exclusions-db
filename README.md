@@ -98,13 +98,21 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   Accessible by Admin or Supervisor.
 
 ## POST Routes:
-
+- ** NOTE: POST routes are in routes.js
 - /login
 - /register (accessibly only by admin)
 - /edit_user
 - /add_exclusion
 - /edit_exclusion
 - /archive_exclusion
+
+## CURRENT PROJECT:
+- Add 'pending' feature:
+  - Add checkbox within new exclusion or edit exclusion templates
+  - Add pending field to exclusion model
+  - Update add_exclusion and edit_exclusion post routes
+  - Update styling and get appropriate get routes for displaying obvious
+    "Pending" on applicable exclusions.
 
 ## FUTURE FEATURES:
 - Ability to add notes on exclusions (not visible to users)

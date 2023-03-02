@@ -26,32 +26,32 @@ block header
 block content 
   div.main-container
     h2.content-title Add New Exclusion Order
-    
-    form(role='form', action="/add_exclusion",method="post")
+
+    form(role='form' action="/add_exclusion" method="post")
       .form-exclusion-section
         .form-element
           label.form-label.name-label.tooltip(for='first_name') * First Name
             .tooltiptext Add middle initial, if known
-          input.form-control.name-input(type='text', name="first_name", placeholder='First Name' size='50' required)
+          input.form-control.name-input(type='text' name="first_name" placeholder='First Name' size='50' required)
           br
         .form-element
           label.form-label.name-label(for='last_name') * Last Name
-          input.form-control.name-input(type='text', name="last_name", placeholder='Last Name' size='50' required)
+          input.form-control.name-input(type='text' name="last_name" placeholder='Last Name' size='50' required)
           br
       .form-exclusion-section
         .form-element
           label.form-label(for='dob') DOB
-          input.form-control(type='date', name="dob", placeholder='DOB')
+          input.form-control(type='date' name="dob" placeholder='DOB')
           br
         .form-element
           label.form-label.tooltip(for='other_info') Other Info
             .tooltiptext i.e. Gender, height, weight...
-          input.form-control(type='text', name="other_info", placeholder='Other Information')
+          input.form-control(type='text' name="other_info" placeholder='Other Information')
           br
       .form-element
         label.form-label.tooltip(for='ordinance') * Ordinance/Policy
           .tooltiptext Example: RCW 9.91.025(a), POL-310(13)
-        input.form-control(type='text', name="ordinance", placeholder='RCW/POL#, separated by comma' required)  
+        input.form-control(type='text' name="ordinance" placeholder='RCW/POL#, separated by comma' required)  
       .form-element
         label.form-label.tooltip(for='description') * Description of infraction 
           small.number 
@@ -104,9 +104,14 @@ block content
           option(value="T-CC Manager") T-CC Manager
         br
         br
-        small * required
-        br 
-        br
+      fieldset
+        .radio-section
+          label.admin-form-label(name='is_active') Pending: 
+            input.admin-form-control(type='checkbox' name='is_active' checked=false) 
+
+      small * required
+      br 
+      br
       .form-button
         button.btn.btn-default(type='submit') Submit
         a(href='/home')
