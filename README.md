@@ -106,15 +106,10 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - /edit_exclusion
 - /archive_exclusion
 
-## CURRENT PROJECT:
-- Add 'pending' feature:
-  - Add checkbox within new exclusion or edit exclusion templates
-  - Add pending field to exclusion model
-  - Update add_exclusion and edit_exclusion post routes
-  - Update styling and get appropriate get routes for displaying obvious
-    "Pending" on applicable exclusions.
+## 3/2/2023:
+- Added 'Pending' exclusion functionality.
 
 ## FUTURE FEATURES:
 - Ability to add notes on exclusions (not visible to users)
 
-### Created: 11/29/2022; Last edited 1/4/2023
+### Created: 11/29/2022; Last edited 3/2/2023

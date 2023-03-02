@@ -45,6 +45,15 @@ router.get('/home', async (req, res, next) => {
           ],
         };
         break;
+      case 'pending':
+        query = {
+          $and: [
+            {date_served: { $eq: "Invalid date"}},
+          ],
+        };
+        break;
+      default:
+        break;
     }
 
     // Array of omparison values for sorting:

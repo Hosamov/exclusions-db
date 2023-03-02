@@ -104,11 +104,10 @@ block content
           option(value="T-CC Manager") T-CC Manager
         br
         br
-      fieldset
-        .radio-section
-          label.admin-form-label(name='is_active') Pending: 
-            input.admin-form-control(type='checkbox' name='is_active' checked=false) 
-
+        label.pending-container(name='pending') Pending
+          input(type='checkbox' name='pending' checked=false)
+          span.checkmark 
+        br
       small * required
       br 
       br

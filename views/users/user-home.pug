@@ -48,18 +48,27 @@ block content
                 option(value="all" selected) All
                 option(value="limited") Limited
                 option(value="lifetime") Lifetime
+                option(value="pending") Pending
               else if filter === 'limited'
                 option(value="all") All
                 option(value="limited" selected) Limited
                 option(value="lifetime") Lifetime
+                option(value="pending") Pending
               else if filter === 'lifetime'
                 option(value="all") All
                 option(value="limited") Limited
                 option(value="lifetime" selected) Lifetime
+                option(value="pending") Pending
+              else if filter === 'pending'
+                option(value="all") All
+                option(value="limited") Limited
+                option(value="lifetime") Lifetime
+                option(value="pending" selected) Pending
               else 
                 option(value="all") All
                 option(value="limited") Limited
                 option(value="lifetime") Lifetime
+                option(value="pending") Pending
             .bottom-right-div
             //-* Sort dropdown:
             label.select-label-home(for='srt') 
@@ -101,7 +110,7 @@ block content
                   | #{exclusion.length} days
               li.exclusion-item 
                 strong Date Served: 
-                | #{exclusion.date_served}
+                | #{!exclusion.pending ? exclusion.date_served : 'Pending'}
               li.exclusion-item 
                 strong Expires on: 
                 | #{exclusion.exp_date !== 'Invalid date' && exclusion.exp_date !== 'Lifetime' ? exclusion.exp_date : 'N/A'}

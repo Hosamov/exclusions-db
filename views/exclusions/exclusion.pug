@@ -53,7 +53,7 @@ block content
       p EXCLUDED PERSON: 
         strong #{exclusion.first_name} #{exclusion.last_name} 
       p This exclusion is effective:  
-        strong #{exclusion.date_served}
+        strong #{(!exclusion.pending) ? exclusion.date_served : 'Pending'}
       p This exclusion expires on: 
         strong #{exclusion.exp_date !== 'Invalid date' && exclusion.exp_date !== 'Lifetime' ? exclusion.exp_date : 'N/A'}
       p Exclusion Length: 

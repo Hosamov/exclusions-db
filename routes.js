@@ -55,7 +55,9 @@ module.exports = function (app) {
                     } else {
                       if (foundUser.active) {
                         foundUser.loggedIn = true;
-                        foundUser.lastLoggedIn = moment(currentDate).tz('America/Los_Angeles').format(); // Update lastLoggedIn
+                        foundUser.lastLoggedIn = moment(currentDate)
+                          .tz('America/Los_Angeles')
+                          .format(); // Update lastLoggedIn
                         await foundUser.save((err) => {
                           if (err) {
                             console.log(err);
@@ -294,6 +296,7 @@ module.exports = function (app) {
       other_length: req.body.other_length,
       img_url: req.body.img_url,
       signature: req.body.signature,
+      pending: req.body.pending,
     };
 
     // If other_length has a value, push that value to length instead.
@@ -335,8 +338,23 @@ module.exports = function (app) {
           length: excl.length === 'Lifetime' ? Infinity : excl.length,
           img_url: excl.img_url,
           signature: excl.signature,
+          pending: (excl.pending === 'on' || excl.pending === 'true') ? true : false,
           archived: false,
         },
+
+        // if (
+        //   foundUser.active === false &&
+        //   (userInfo.active === 'on' || userInfo.active === 'true')
+        // ) {
+        //   //* Send activation email:
+        //   email(
+        //     'Account Activated - Exclusions DB',
+        //     `<p>Greetings, ${foundUser.first_name}!</p> 
+        //      ${emailBodies.account_activated_body}`,
+        //     foundUser.username
+        //   ).catch(console.error);
+        //   foundUser.active = true;
+        // }
       ],
       (err) => {
         if (err) {
@@ -365,6 +383,7 @@ module.exports = function (app) {
       img_url: req.body.img_url,
       signature: req.body.signature,
       super_title: req.body.super_title,
+      pending: req.body.pending,
     };
 
     //* Calculations for adding exclusion length to served date:
@@ -406,6 +425,7 @@ module.exports = function (app) {
           foundExclusion.img_url = excl.img_url;
           foundExclusion.signature = excl.signature;
           foundExclusion.super_title = excl.super_title;
+          foundExclusion.pending = (excl.pending === 'on' || excl.pending === 'true') ? true : false,
 
           await foundExclusion.save((err) => {
             if (err) {
