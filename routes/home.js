@@ -33,6 +33,7 @@ router.get('/home', async (req, res, next) => {
           $and: [
             { length: { $ne: 'Infinity' } },
             { length: { $ne: 'Lifetime' } },
+            { date_served: { $ne: 'Invalid date' } },
           ],
         };
         break;
@@ -47,9 +48,7 @@ router.get('/home', async (req, res, next) => {
         break;
       case 'pending':
         query = {
-          $and: [
-            {date_served: { $eq: "Invalid date"}},
-          ],
+          $and: [{ date_served: { $eq: 'Invalid date' } }],
         };
         break;
       default:
@@ -269,7 +268,10 @@ router.get('/home/:id/delete_success', (req, res, next) => {
     const exclusionId = req.params.id;
     // Make accessible to admin user only
     if (req.user.role === 'admin') {
-      res.render('./exclusions/delete-success', { id: exclusionId, user: req.user });
+      res.render('./exclusions/delete-success', {
+        id: exclusionId,
+        user: req.user,
+      });
     }
   } else {
     res.redirect('/unauthorized');
@@ -290,7 +292,9 @@ router.get('/home/:exclusion_id/archive', (req, res, next) => {
             if (err) {
               console.log(err);
             } else {
-              console.log('Exclusion for ' + exclId + " successfully archived.");
+              console.log(
+                'Exclusion for ' + exclId + ' successfully archived.'
+              );
               res.redirect('/archive');
             }
           });
