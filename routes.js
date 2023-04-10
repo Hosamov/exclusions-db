@@ -19,7 +19,7 @@ module.exports = function (app) {
     if (req.isAuthenticated()) {
       res.render('./exclusions/image-howto');
     } else {
-      res.redirect('/unauthorized');
+      res.redirect('login');
     }
   });
 
