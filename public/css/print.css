@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
 /** Microsoft Edge */
 @supports (-ms-ime-align: auto) {
   div {
@@ -6,8 +8,6 @@
 }
 
 @media print {
-
-  
 
   ul li {
     page-break-after: avoid;
@@ -76,6 +76,11 @@
 
   .excl-foot {
     break-after: always;
+    page-break-after: always;
+  }
+
+  .excl-min-body p {
+    font-family: 'Courier Prime', Courier, monospace
   }
 
   .main-container {
