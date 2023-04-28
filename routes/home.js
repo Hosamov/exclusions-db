@@ -48,7 +48,7 @@ router.get('/home', async (req, res, next) => {
         break;
       case 'pending':
         query = {
-          $and: [{ date_served: { $eq: 'Invalid date' } }],
+          $and: [{ pending: { $eq: true } }],
         };
         break;
       default:

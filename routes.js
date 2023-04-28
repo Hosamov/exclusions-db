@@ -290,6 +290,7 @@ module.exports = function (app) {
       other_info: req.body.other_info,
       ordinance: req.body.ordinance,
       description: req.body.description,
+      detailed_description: req.body.detailed_description,
       date_served: moment(req.body.date_served).format('YYYY-MM-DD'),
       exp_date: req.body.exp_date,
       length: req.body.length, //Note: is converted to a string for 'Lifetime'
@@ -333,6 +334,7 @@ module.exports = function (app) {
           other_info: excl.other_info,
           ordinance: excl.ordinance,
           description: excl.description,
+          detailed_description: excl.detailed_description,
           date_served: moment(excl.date_served.toString()).format('MM/DD/YYYY'),
           exp_date: moment(excl.exp_date.toString()).format('MM/DD/YYYY'), // convert to string due to "Lifetime"
           length: excl.length === 'Lifetime' ? Infinity : excl.length,
@@ -377,6 +379,7 @@ module.exports = function (app) {
       other_info: req.body.other_info,
       ordinance: req.body.ordinance,
       description: req.body.description,
+      detailed_description: req.body.detailed_description,
       date_served: moment(req.body.date_served).format('YYYY-MM-DD'),
       exp_date: req.body.exp_date,
       length: req.body.length,
@@ -415,6 +418,7 @@ module.exports = function (app) {
             (foundExclusion.other_info = excl.other_info);
           foundExclusion.ordinance = excl.ordinance;
           foundExclusion.description = excl.description;
+          foundExclusion.detailed_description = excl.detailed_description;
           foundExclusion.date_served = moment(
             excl.date_served.toString()
           ).format('MM/DD/YYYY');
