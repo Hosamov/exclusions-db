@@ -109,7 +109,15 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 ## 3/2/2023:
 - Added 'Pending' exclusion functionality.
 
-## FUTURE FEATURES:
-- Ability to add notes on exclusions (not visible to users)
+# 4/28/2023
+- Incorporated "detailed description" on add_exclusion and edit_exclusion post routes.
+- Updated front end to gather detailed_description data and display to the user
+  on the second page of the exclusion order.
+- Made minor adjustments to styling (font sizes)
+- Fixed bug that wasn't allowing some pending exclusions to show up in the
+  sorted list.
 
-### Created: 11/29/2022; Last edited 3/2/2023
+## FUTURE FEATURES:
+- None planned currently.
+
+### Created: 11/29/2022; Last edited 4/28/2023
