@@ -25,7 +25,7 @@ block header
 block content 
   div.main-container
     h2.content-title Edit existing Exclusion Order
-
+    br
     form(role='form' action="/edit_exclusion" method="post")
       .form-exclusion-section
         .form-element
@@ -57,6 +57,12 @@ block content
           .tooltiptext Max characters: 540
         textarea.form-control.description(id="description" name="description" rows='4' cols="20" maxlength="540" required) #{exclusion.description}
         br
+      .form-element
+        label.form-label.tooltip(for='detailed_description') * Detailed Description 
+          small.number
+            em (1040)
+          .tooltiptext Max characters: 1040
+        textarea.form-control.detailed_description(id="detailed_description" name="detailed_description" rows='6' maxLength="1040" required) Detailed Description...
       .form-exclusion-section
         .form-element
           label.form-label.tooltip(for='length' id='exclusion-label') Exclusion Length

@@ -278,6 +278,12 @@
     font-size: 1.2rem;
   }
 
+  .exclusion-list-item {
+    font-size: .9rem;
+    margin: 0;
+    padding: 0;
+  }
+
   .exclusion-name {
     font-size: 1rem;
   }
@@ -347,7 +353,23 @@
   }
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 370px) {
+  .excl-container {
+    box-shadow: none;
+    width: 85vw;
+    margin-right: 15px;
+  }
+
+  /* .exclusion-list-item {
+    font-size: .8rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .exclusion-name {
+    font-size: 1rem;
+  } */
+
   .signature {
     font-size: 1rem;
   }

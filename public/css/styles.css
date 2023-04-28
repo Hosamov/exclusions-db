@@ -26,7 +26,6 @@ html, body {
   height: 100%;
 }
 
-
 * {
   font-family: calibri, ariel, sans-serif;
   box-sizing: border-box;
@@ -91,6 +90,7 @@ a:active {
   display: flex;
   flex-direction: row;
   list-style-type: none;
+  height: auto;
   margin: 0;
   padding: 0;
   z-index: 1;
@@ -292,11 +292,11 @@ textarea {
 /* User Home*/
 
 .form-label {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .form-control {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .form-exclusion-section {
@@ -411,7 +411,7 @@ fieldset {
   padding: .2rem;
   background-color: var(--blue);
   color: var(--white);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 2px .25rem;
 }
 
@@ -453,7 +453,7 @@ fieldset {
   border: none;
   padding: .5rem;
   color: var(--blue);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 2px .25rem;
 }
 
@@ -511,10 +511,16 @@ fieldset {
   height: 250px;
   background-color: var(--white_pure);
   box-shadow: 2px 2px 2px 2px var(--gray4);
+  font-size: 1.0rem;
 }
 
 .exclusion-list-item:hover {
   box-shadow: 1px 1px 2px 2px var(--charcoal_blue);
+}
+
+.exclusion-name {
+  padding-top: 8px;
+  font-size: 1.3rem;
 }
 
 .user-item {

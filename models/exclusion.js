@@ -8,6 +8,7 @@ const ExclusionSchema = new Schema({
   other_info: String,
   ordinance: String,
   description: String,
+  detailed_description: String,
   date_served: String,
   exp_date: String,
   length: String,
