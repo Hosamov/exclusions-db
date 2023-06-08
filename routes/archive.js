@@ -61,7 +61,7 @@ router.get('/archive', (req, res, next) => {
 router.get('/archive/:exclusion_id/unarchive/', (req, res, next) => {
   const exclId = req.params.exclusion_id;
   if(req.isAuthenticated()) {
-    if(req.user.role === 'admin') {
+    if(req.user.role === 'admin' || req.user.role == 'supervisor') {
       Exclusion.findOne({_id: {$eq: exclId}}, (err, foundExclusion) => {
         foundExclusion.archived = false;
         foundExclusion.exp_date = 'Lifetime';
