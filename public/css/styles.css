@@ -655,7 +655,7 @@ fieldset {
 }
 
 
-/* Tooltip */
+/* Tooltip
 .tooltip {
   display:inline-block;
   position:relative;
@@ -695,6 +695,7 @@ fieldset {
   height:12px;
   overflow:hidden;
 }
+*/
 
 .tooltip .bottom i::after {
   content:'';
@@ -703,9 +704,9 @@ fieldset {
   height:12px;
   left:50%;
   transform:translate(-50%,50%) rotate(45deg);
-  background-color:#EEEEEE;
+  background-color:--var(--white_pure);
   box-shadow:0 1px 8px rgba(0,0,0,0.5);
-}
+} 
 
 
 /* https://www.w3schools.com/css/css_tooltip.asp */
@@ -717,19 +718,21 @@ fieldset {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  min-width: 200px;
+  min-width: 100px;
   max-width: 300px;
-  background-color: var(--blue);
-  color: #fff;
+  background-color: var(--white_pure);
+  color: var(--charcoal);
   text-align: center;
-  border-radius: 6px;
-  padding: 8px 8px;
+  border-radius: 2px;
+  border: 0.5px solid var(--charcoal);
+  padding: 4px 4px;
   font-size: 1rem;
   
   /* Position the tooltip */
   position: absolute;
-  width: 120px;
-  top: 100%;
+  min-width: 120px;
+  max-width: 300px;
+  top: 125%;
   left: 50%;
   margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
 }
@@ -738,16 +741,16 @@ fieldset {
   visibility: visible;
 }
 
-.tooltip .tooltiptext::after {
+/* .tooltip .tooltiptext::after {
   content: " ";
   position: absolute;
-  bottom: 100%;  /* At the top of the tooltip */
+  bottom: 100%;  
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent var(--blue) transparent;
-}
+  border-color: transparent transparent var(--charcoal) transparent;
+} */
 
 /** Modal Window */
 

@@ -71,7 +71,10 @@
 }
 
 @media only screen and (max-width: 700px) {
-
+  .tooltip:hover .tooltiptext {
+    visibility: hidden;
+  }
+  
    /* Users */
    .user-right {
     position: absolute;
