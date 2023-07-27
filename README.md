@@ -117,7 +117,9 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Fixed bug that wasn't allowing some pending exclusions to show up in the
   sorted list.
 
-## FUTURE FEATURES:
-- None planned currently.
+## PLANNED FEATURES:
+- Email users - opt in when new exclusion has been added to the list
+- FIX: Pending for lifetime exclusions being displayed in lifetime list
+- FIX: auto-populate "Detailed Description" field when a new exclusion is added
 
-### Created: 11/29/2022; Last edited 4/28/2023
+### Created: 11/29/2022; Last edited 7/27/2023

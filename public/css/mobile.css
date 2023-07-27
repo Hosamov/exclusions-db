@@ -242,7 +242,11 @@
     }
 }
 
-@media only screen and (max-width: 436px) {
+@media only screen and (max-width: 444px) {
+  body {
+    font-size: 11pt;
+  }
+
   .bottom-left-div {
     float: none;
     max-width: 300px;
@@ -258,6 +262,15 @@
 
   li.user-item {
     width: 80%;
+  }
+
+  .exclusion-list-item {
+    min-height: 250px;
+    max-height: 360px;
+    font-size: .9rem;
+  }
+  .exclusion-name {
+    margin: 2px;
   }
 }
 
