@@ -33,7 +33,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   - Authorized users may edit any active exclusion order.
 - Rendering:
   - Exclusions list and exclusion orders are rendered for desktop, mobile, and print.
-- Images are rendered remotely through Google Photos links.
+- Images are currently rendered remotely through Google Photos links.
   - Convert: https://www.labnol.org/embed/google/photos/
 
 # Routes
@@ -109,7 +109,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 ## 3/2/2023:
 - Added 'Pending' exclusion functionality.
 
-# 4/28/2023
+## 4/28/2023
 - Incorporated "detailed description" on add_exclusion and edit_exclusion post routes.
 - Updated front end to gather detailed_description data and display to the user
   on the second page of the exclusion order.
@@ -117,9 +117,12 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Fixed bug that wasn't allowing some pending exclusions to show up in the
   sorted list.
 
+## 7/27/2023
+- ❌ FIX: Pending for lifetime exclusions being displayed in lifetime list
+- ❌ FIX: auto-populate "Detailed Description" field when a new exclusion is added
+
 ## PLANNED FEATURES:
 - Email users - opt in when new exclusion has been added to the list
-- FIX: Pending for lifetime exclusions being displayed in lifetime list
-- FIX: auto-populate "Detailed Description" field when a new exclusion is added
 
-### Created: 11/29/2022; Last edited 7/27/2023
+
+### Originally created: 11/29/2022; Last edited 7/27/2023
