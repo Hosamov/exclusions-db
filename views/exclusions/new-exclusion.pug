@@ -57,14 +57,14 @@ block content
           small.number 
             em (540)
           .tooltiptext Max characters: 540
-        textarea.form-control.description(id="description" name="description" rows='4' maxlength="540" required) Description of infraction...
+        textarea.form-control.description(id="description" name="description" rows='4' maxlength="540" placeholder="Description of infraction..." required)
         br
       .form-element
         label.form-label.tooltip(for='detailed_description') * Detailed Description 
           small.number
             em (1040)
           .tooltiptext Max characters: 1040
-        textarea.form-control.detailed_description(id="detailed_description" name="detailed_description" rows='6' maxLength="1040" required) Detailed Description...
+        textarea.form-control.detailed_description(id="detailed_description" name="detailed_description" rows='6' maxLength="1040" placeholder="Insert exclusion notes here... (exclusion history)" required)
       .form-exclusion-section
         .form-element
           label.form-label(for='length') * Exclusion Length

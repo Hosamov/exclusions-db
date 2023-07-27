@@ -118,8 +118,11 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   sorted list.
 
 ## 7/27/2023
-- ❌ FIX: Pending for lifetime exclusions being displayed in lifetime list
-- ❌ FIX: auto-populate "Detailed Description" field when a new exclusion is added
+- ✔ Fixed bug that was allowing pending lifetime exclusions be displayed in
+  regular lifetime list
+- ✔ Fixed auto-populate "Detailed Description" field when a new exclusion is
+  added. Also added placeholder values for description and and detailed
+  description textareas in new-exclusion.pug.
 
 ## PLANNED FEATURES:
 - Email users - opt in when new exclusion has been added to the list
