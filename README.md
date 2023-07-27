@@ -123,6 +123,6 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## PLANNED FEATURES:
 - Email users - opt in when new exclusion has been added to the list
-
+- Mark/highlight newest additions (within past day)
 
 ### Originally created: 11/29/2022; Last edited 7/27/2023

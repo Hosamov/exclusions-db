@@ -42,7 +42,9 @@ router.get('/home', async (req, res, next) => {
         query = {
           $or: [
             { length: { $eq: 'Infinity' } },
-            { length: { $eq: 'Lifetime' } },
+            { length: { $eq: 'Lifetime' } }],
+          $and: [
+            { pending: { $ne: false } },
           ],
         };
         break;
