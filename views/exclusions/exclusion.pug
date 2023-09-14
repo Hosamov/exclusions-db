@@ -54,13 +54,14 @@ block content
       h1.excl-title MTA Exclusion Order 
     div.excl-body
       img.excl-picture(src=`${exclusion.img_url}`)
-      p Date: #{exclusion.date_served}
+      p Date: 
+        strong #{(!exclusion.pending) ? exclusion.date_served : '__/__/____'}
       p EXCLUDED PERSON: 
         strong #{exclusion.first_name} #{exclusion.last_name} 
       p This exclusion is effective:  
-        strong #{(!exclusion.pending) ? exclusion.date_served : 'Pending'}
+        strong #{(!exclusion.pending) ? exclusion.date_served : '__/__/____'}
       p This exclusion expires on: 
-        strong #{exclusion.exp_date !== 'Invalid date' && exclusion.exp_date !== 'Lifetime' ? exclusion.exp_date : 'N/A'}
+        strong #{exclusion.exp_date !== 'Invalid date' && exclusion.exp_date !== 'Lifetime' ? exclusion.exp_date : (!exclusion.pending) ? 'N/A' : '__/__/____'}
       p Exclusion Length: 
         strong #{exclusion.length === 'Infinity' || exclusion.length === 'Lifetime' ? 'Lifetime' : exclusion.length + ' days'} 
       p Throughout this period you are barred from entering in or onto 

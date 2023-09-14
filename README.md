@@ -124,8 +124,14 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   added. Also added placeholder values for description and and detailed
   description textareas in new-exclusion.pug.
 
-## PLANNED FEATURES:
-- Email users - opt in when new exclusion has been added to the list
-- Mark/highlight newest additions (within past day)
+## 9/14/2023
+- ✔ Edited individual PENDING exclusion to display '__/__/__' in "date", "effective",
+  and "expires on" lines. Edited exclusions.pug.
 
-### Originally created: 11/29/2022; Last edited 7/27/2023
+## PLANNED FEATURES:
+- Email users - opt in to see when new exclusion has been added to the list
+- Include list of RCWs/Policy points to choose from during exclusion creation process.
+- Add sort by expiring soon.
+
+### Originally created: 11/29/2022; Last edited: 9/14/2023
+ 

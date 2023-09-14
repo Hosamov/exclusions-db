@@ -57,7 +57,7 @@ router.get('/home', async (req, res, next) => {
         break;
     }
 
-    // Array of omparison values for sorting:
+    // Array of comparison values for sorting:
     sortArr = ['last_name', 'first_name', 'length', 'exp_date'];
 
     let sortItem = sortArr[0]; // Initialize to 'last_name'
