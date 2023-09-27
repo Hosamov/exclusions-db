@@ -128,6 +128,9 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - ✔ Edited individual PENDING exclusion to display '__/__/__' in "date", "effective",
   and "expires on" lines. Edited exclusions.pug.
 
+## 9/26/2023
+- Fixed bug - home.js line 47: check if pending is $ne TRUE (from false)
+
 ## PLANNED FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
