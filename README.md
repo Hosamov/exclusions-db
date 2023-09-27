@@ -129,12 +129,19 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   and "expires on" lines. Edited exclusions.pug.
 
 ## 9/26/2023
-- Fixed bug - home.js line 47: check if pending is $ne TRUE (from false)
+- ✔ Fixed bug - home.js line 47: check if pending is $ne TRUE (from false)
 
-## PLANNED FEATURES:
+## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
 
-### Originally created: 11/29/2022; Last edited: 9/14/2023
+
+## TODOS:
+- **Instead of filter, add buttons for desktop view/screen
+- **Fix exclusion styling on mobile (it has too large of a margin?)
+- **Add section for minimum exclusion lengths
+- **Fix exclusion length in edit form (why is it showing an imput field vs dropdown?)
+
+### Originally created: 11/29/2022; Last edited: 9/26/2023
  

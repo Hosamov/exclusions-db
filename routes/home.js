@@ -22,7 +22,10 @@ router.get('/home', async (req, res, next) => {
 
     let query; // Initializer for filter query string
     // Check values to filter properly:
+    // TODO: Change to buttons for desktop version (Does "sort" even matter?)
     switch (filter) {
+      // TODO: Adjust to the following search criterias:
+      //! Limited, Lifetime, Active (Default - NEW addition), All, Pending */
       case 'all':
         console.log('view all.');
         query = {};
