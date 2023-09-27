@@ -131,15 +131,16 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 ## 9/26/2023
 - ✔ Fixed bug - home.js line 47: check if pending is $ne TRUE (from false)
 
+## 9/27/2023
+- ✔ Fixed mobile style for .excl-container width in max-width: 370 
+
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
 
-
 ## TODOS:
 - **Instead of filter, add buttons for desktop view/screen
-- **Fix exclusion styling on mobile (it has too large of a margin?)
 - **Add section for minimum exclusion lengths
 - **Fix exclusion length in edit form (why is it showing an imput field vs dropdown?)
 

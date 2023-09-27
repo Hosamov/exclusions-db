@@ -15,19 +15,7 @@
   --success: #19bf2c;
 }
 
-/* @media only screen and (max-width: 1700px) {
-   .header-right {
-    right: 5%;
-  } 
-} */
-
 @media only screen and (max-width: 1420px) {
-  /* .header-right {
-    position: relative;
-    width: 72%;
-    text-align: right;
-  } */
-
   .main-container {
     width: 75%;
   }
@@ -341,14 +329,6 @@
     padding: 6px;
   }
 
-  /* li.user-item {
-    width: 60%;
-  } */
-
-  /* .users-list-item {
-    width: 90%;
-  } */
-
   button.btn {
     padding: 6px;
     width: 70px;
@@ -360,8 +340,6 @@
 
   .excl-container {
     box-shadow: none;
-    width: 85vw;
-    margin-right: 15px;
   }
 
   footer {
@@ -372,19 +350,11 @@
 @media only screen and (max-width: 370px) {
   .excl-container {
     box-shadow: none;
-    width: 85vw;
-    margin-right: 15px;
-  }
-
-  /* .exclusion-list-item {
-    font-size: .8rem;
     margin: 0;
-    padding: 0;
   }
-
-  .exclusion-name {
-    font-size: 1rem;
-  } */
+  .top-nav {
+    width: 100vw;
+  }
 
   .signature {
     font-size: 1rem;
