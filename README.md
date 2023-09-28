@@ -141,6 +141,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## 9/28/2023
 - Added new button styling for selected filter button (styles.css, user-home.pug)
+- Adjusted styling for adding new exclusion (changed to button)
 
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
@@ -150,7 +151,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## TODOS:
 - **Add section for minimum exclusion lengths
-- **Fix exclusion length in edit form (why is it showing an imput field vs dropdown?)
+- **Fix exclusion length in edit form (why is it showing an input field vs dropdown?)
 
 ### Originally created: 11/29/2022; Last edited: 9/27/2023
  

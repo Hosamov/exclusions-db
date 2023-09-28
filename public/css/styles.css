@@ -19,6 +19,7 @@
   --charcoal_light: #00385d;  
   --error: #e1341e;
   --success: #19bf2c;
+  --green: #00a513;
 }
 
 html, body {
@@ -332,6 +333,22 @@ textarea {
   font-size: 1.2rem;
 }
 
+.new-excl-btn {
+  border-radius: 15px;
+  font-size: 1rem;
+  color: var(--white);
+  margin: 3px 2px;
+  padding: 3px 8px;
+  border: 0;
+  background-color: var(--green);
+}
+
+.new-excl-btn:hover {
+  cursor: pointer;
+  background-color: var(--success);
+  color: var(--gray4);
+}
+
 /** FILTER BUTTONS */
 .filter-btn {
   border-radius: 15px;
@@ -343,6 +360,7 @@ textarea {
 }
 
 .filter-btn:hover {
+  cursor: pointer;
   background-color: var(--blueCheck);
   color: var(--white);
 }

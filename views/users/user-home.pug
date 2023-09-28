@@ -39,8 +39,7 @@ block content
       if user.role === 'admin' || user.role === 'supervisor'
         .left-btn-div
           a(href='/add_new_exclusion')
-            i.fas-icon.tooltip(class="fa-solid fa-plus")
-              .tooltiptext New Exclusion
+            button.new-excl-btn + New Exclusion
           .right-btn-div
             btn(onclick=`window.print()`)
               .fas-icon(class="fa-solid fa-print")
