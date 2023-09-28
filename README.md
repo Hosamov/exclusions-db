@@ -139,6 +139,9 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Added total qualifying exclusions to end of title (after filter)
 - Added current date below title. Checked/verified for print
 
+## 9/28/2023
+- Added new button styling for selected filter button (styles.css, user-home.pug)
+
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.

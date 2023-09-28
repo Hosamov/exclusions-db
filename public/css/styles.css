@@ -346,6 +346,11 @@ textarea {
   background-color: var(--blueCheck);
   color: var(--white);
 }
+
+.btn-active {
+  background-color: var(--blueCheck);
+  color: var(--white);
+}
 /**/
 
 

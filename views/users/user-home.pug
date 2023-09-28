@@ -29,6 +29,7 @@ block content
     if filter == null
       h2.content-title Exclusions List: All 
         small (#{exclusions.length})
+        small.date #{date}
     else 
       h2.content-title Exclusions List: #{filter.charAt(0).toUpperCase() + filter.slice(1)} 
         small (#{exclusions.length})
@@ -48,11 +49,11 @@ block content
         .bottom-left-div
           //-* Filter dropdown:
           form(id='form-filter-sort' method="get")
-            button.filter-btn.active-btn(id='active' name='filter' value='active') Active
-            button.filter-btn.pending-btn(id='pending' name='filter' value="pending") Pending
-            button.filter-btn.limited-btn(id='limited' name='filter' value="limited") Limited 
-            button.filter-btn.lifetime-btn(id='lifetime' name='filter' value="lifetime") Lifetime 
-            button.filter-btn.all-btn(id='all' name='filter' value="all") All
+            button.filter-btn.active-btn(id='active' name='filter' value='active' class=filter=='active'? 'btn-active' : '') Active
+            button.filter-btn.pending-btn(id='pending' name='filter' value="pending" class=filter=='pending'? 'btn-active' : '') Pending
+            button.filter-btn.limited-btn(id='limited' name='filter' value="limited" class=filter=='limited'? 'btn-active' : '') Limited 
+            button.filter-btn.lifetime-btn(id='lifetime' name='filter' value="lifetime" class=filter=='lifetime'? 'btn-active' : '') Lifetime 
+            button.filter-btn.all-btn(id='all' name='filter' value="all" class=filter=='all'||filter==null? 'btn-active' : '') All
             
       hr
       each exclusion in exclusions
