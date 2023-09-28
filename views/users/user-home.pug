@@ -26,7 +26,13 @@ block header
           
 block content  
   div.main-container
-    h2.content-title Exclusions List
+    if filter == null
+      h2.content-title Exclusions List: All 
+        small (#{exclusions.length})
+    else 
+      h2.content-title Exclusions List: #{filter.charAt(0).toUpperCase() + filter.slice(1)} 
+        small (#{exclusions.length})
+        small.date #{date}
 
     ul.list 
       if user.role === 'admin' || user.role === 'supervisor'
@@ -42,56 +48,12 @@ block content
         .bottom-left-div
           //-* Filter dropdown:
           form(id='form-filter-sort' method="get")
-            label.select-label-home(for='filter') 
-              small Filter: 
-            select.select-input-home(name="filter" id="filter")
-              if filter === 'all'
-                option(value="all" selected) All
-                option(value="limited") Limited
-                option(value="lifetime") Lifetime
-                option(value="pending") Pending
-              else if filter === 'limited'
-                option(value="all") All
-                option(value="limited" selected) Limited
-                option(value="lifetime") Lifetime
-                option(value="pending") Pending
-              else if filter === 'lifetime'
-                option(value="all") All
-                option(value="limited") Limited
-                option(value="lifetime" selected) Lifetime
-                option(value="pending") Pending
-              else if filter === 'pending'
-                option(value="all") All
-                option(value="limited") Limited
-                option(value="lifetime") Lifetime
-                option(value="pending" selected) Pending
-              else 
-                option(value="all") All
-                option(value="limited") Limited
-                option(value="lifetime") Lifetime
-                option(value="pending") Pending
-            .bottom-right-div
-            //-* Sort dropdown:
-            label.select-label-home(for='srt') 
-              small Sort by: 
-            select.select-input-home(name="srt" id="srt")
-              if sort === 'last_name'
-                option(value="last_name" selected) Last Name
-                option(value="first_name") First Name
-                option(value="exp_date") Expiration Date
-              else if sort === 'first_name'
-                option(value="last_name") Last Name
-                option(value="first_name" selected) First Name
-                option(value="exp_date") Expiration Date
-              else if sort === 'exp_date'
-                option(value="last_name") Last Name
-                option(value="first_name") First Name
-                option(value="exp_date" selected) Expiration Date
-              else 
-                option(value="last_name") Last Name
-                option(value="first_name") First Name
-                option(value="exp_date") Expiration Date
-            button.filter-srt-btn(onclick='filterSort()') Submit
+            button.filter-btn.active-btn(id='active' name='filter' value='active') Active
+            button.filter-btn.pending-btn(id='pending' name='filter' value="pending") Pending
+            button.filter-btn.limited-btn(id='limited' name='filter' value="limited") Limited 
+            button.filter-btn.lifetime-btn(id='lifetime' name='filter' value="lifetime") Lifetime 
+            button.filter-btn.all-btn(id='all' name='filter' value="all") All
+            
       hr
       each exclusion in exclusions
         .excl-card
@@ -135,4 +97,3 @@ block content
     #modal
 
   script(src='/static/js/logout.js')
-  script(src='/static/js/filter_sort.js')

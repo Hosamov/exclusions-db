@@ -113,6 +113,12 @@
     border: 1px solid black;
   }
 
+  .date {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+  }
+
   .excl-list-title {
     text-align: center;
     display: none;

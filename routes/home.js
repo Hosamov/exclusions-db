@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 
+new Date();
+
 // Models:
 const Exclusion = require('../models/exclusion');
 
@@ -17,18 +19,24 @@ router.get('/home', async (req, res, next) => {
       role: req.user.role,
     };
 
+    let date = new Date();
+    let today = moment(date.toString()).format('MM-DD-YYYY');
+
     let filter = req.query.filter;
     let srt = req.query.srt;
 
     let query; // Initializer for filter query string
     // Check values to filter properly:
-    // TODO: Change to buttons for desktop version (Does "sort" even matter?)
+    //! Note: filter in user-home.pug template
     switch (filter) {
-      // TODO: Adjust to the following search criterias:
-      //! Limited, Lifetime, Active (Default - NEW addition), All, Pending */
-      case 'all':
-        console.log('view all.');
+      //* Cases: all, active, limited, lifetime, pending
+      case 'all': // active and pending
         query = {};
+        break;
+      case 'active':
+        query = {
+          $and: [{ pending: { $ne: true } }]
+        };
         break;
       case 'limited':
         // filter query string for NOT 'infinity' or 'lifetime'
@@ -61,6 +69,7 @@ router.get('/home', async (req, res, next) => {
     }
 
     // Array of comparison values for sorting:
+    //? Keep in future iterations?
     sortArr = ['last_name', 'first_name', 'length', 'exp_date'];
 
     let sortItem = sortArr[0]; // Initialize to 'last_name'
@@ -113,7 +122,9 @@ router.get('/home', async (req, res, next) => {
               exclusions: currentExclusionsArr, // Display current exclusions only
               user: thisUser,
               filter: filter,
-              sort: srt,
+              sort: srt, // TODO: Delete this in future iteration?
+              date: today, // today's date
+              // TODO: Include total amount of exclusions
             });
           } else {
             res.redirect('/error');

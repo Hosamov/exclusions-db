@@ -133,16 +133,21 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## 9/27/2023
 - ✔ Fixed mobile style for .excl-container width in max-width: 370 
+- Adjusted --orange color (buttons) to be brighter/fuller (styles.css)
+- Added filter buttons to replace dropdown menu (modernized)
+- Added exclusion filter to title
+- Added total qualifying exclusions to end of title (after filter)
+- Added current date below title. Checked/verified for print
 
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
+- Add search feature to find active exclusions easier
 
 ## TODOS:
-- **Instead of filter, add buttons for desktop view/screen
 - **Add section for minimum exclusion lengths
 - **Fix exclusion length in edit form (why is it showing an imput field vs dropdown?)
 
-### Originally created: 11/29/2022; Last edited: 9/26/2023
+### Originally created: 11/29/2022; Last edited: 9/27/2023
  
