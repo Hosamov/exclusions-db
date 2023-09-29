@@ -35,7 +35,7 @@ router.get('/home', async (req, res, next) => {
         break;
       case 'active':
         query = {
-          $and: [{ pending: { $ne: true } }]
+          $and: [{ pending: { $ne: true } }],
         };
         break;
       case 'limited':
@@ -53,10 +53,9 @@ router.get('/home', async (req, res, next) => {
         query = {
           $or: [
             { length: { $eq: 'Infinity' } },
-            { length: { $eq: 'Lifetime' } }],
-          $and: [
-            { pending: { $ne: true } },
+            { length: { $eq: 'Lifetime' } },
           ],
+          $and: [{ pending: { $ne: true } }],
         };
         break;
       case 'pending':
@@ -321,6 +320,16 @@ router.get('/home/:exclusion_id/archive', (req, res, next) => {
     }
   } else {
     res.redirect('/');
+  }
+});
+
+/* Exclusions-data GET route
+//* Displays a list of criteria for issuing exclusions */
+router.get('/exclusions-data', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.render('./exclusions/exclusions-criteria', {
+      user: req.user,
+    });
   }
 });
 

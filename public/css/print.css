@@ -68,6 +68,10 @@
     display: none;
   }
 
+  .new-excl-btn {
+    display: none;
+  }
+
   footer {
     display: none;
     position: fixed;

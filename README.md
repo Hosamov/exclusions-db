@@ -142,6 +142,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 ## 9/28/2023
 - Added new button styling for selected filter button (styles.css, user-home.pug)
 - Adjusted styling for adding new exclusion (changed to button)
+- Added preliminary route/view for exclusions-criteria
 
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
