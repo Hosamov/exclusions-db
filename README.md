@@ -144,6 +144,10 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Adjusted styling for adding new exclusion (changed to button)
 - Added preliminary route/view for exclusions-criteria
 
+## 9/29/2023
+- Added email confirmation for new exclusions - local/adding user and hard-coded
+  admin user only - Greater functionality added to TODOs (below)
+
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
@@ -153,6 +157,9 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 ## TODOS:
 - **Add section for minimum exclusion lengths
 - **Fix exclusion length in edit form (why is it showing an input field vs dropdown?)
+- **Make email sending more fluid:
+  - Allow "opt in" in user account for users to choose to be notified via email
+    of new exclusions being added
 
 ### Originally created: 11/29/2022; Last edited: 9/27/2023
  

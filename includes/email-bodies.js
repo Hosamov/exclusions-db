@@ -24,6 +24,11 @@ const emailBodies = {
     <p>Thank you!</p>
     <br>
     <p>Backyard Dev</p>`,
+  new_exclusion_added: `
+    <p> A new exclusion has been added within the MTA Exclusions DB.</p>
+    <p>Sincerely,</p>
+    <br>
+    <p>MTA Exclusions DB</p>`,
 };
 
 module.exports = emailBodies;

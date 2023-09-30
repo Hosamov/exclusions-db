@@ -340,28 +340,22 @@ module.exports = function (app) {
           length: excl.length === 'Lifetime' ? Infinity : excl.length,
           img_url: excl.img_url,
           signature: excl.signature,
-          pending: (excl.pending === 'on' || excl.pending === 'true') ? true : false,
+          pending:
+            excl.pending === 'on' || excl.pending === 'true' ? true : false,
           archived: false,
         },
-
-        // if (
-        //   foundUser.active === false &&
-        //   (userInfo.active === 'on' || userInfo.active === 'true')
-        // ) {
-        //   //* Send activation email:
-        //   email(
-        //     'Account Activated - Exclusions DB',
-        //     `<p>Greetings, ${foundUser.first_name}!</p> 
-        //      ${emailBodies.account_activated_body}`,
-        //     foundUser.username
-        //   ).catch(console.error);
-        //   foundUser.active = true;
-        // }
       ],
       (err) => {
         if (err) {
           console.log(err);
         } else {
+            //* Send new exclusion success email:
+            email(
+              'New Exclusion Order Added Successfully! - Exclusions DB',
+              `<p>Greetings, ${req.user.first_name}!</p>
+               ${emailBodies.new_exclusion_added}<br> Date: ${excl.date_served} <br>Exclusion Length: ${excl.length}<br> Pending: ${excl.pending === undefined ? false : true}`,
+              [req.user.username, 'hosamov@hotmail.com' ] // Send email to current user and admin
+            ).catch(console.error);
           res.redirect('/home');
         }
       }
@@ -429,21 +423,21 @@ module.exports = function (app) {
           foundExclusion.img_url = excl.img_url;
           foundExclusion.signature = excl.signature;
           foundExclusion.super_title = excl.super_title;
-          foundExclusion.pending = (excl.pending === 'on' || excl.pending === 'true') ? true : false,
-
-          await foundExclusion.save((err) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log(
-                foundExclusion.first_name +
-                  ' ' +
-                  foundExclusion.last_name +
-                  ' has been successfully updated.'
-              );
-              res.redirect('/home');
-            }
-          });
+          (foundExclusion.pending =
+            excl.pending === 'on' || excl.pending === 'true' ? true : false),
+            await foundExclusion.save((err) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(
+                  foundExclusion.first_name +
+                    ' ' +
+                    foundExclusion.last_name +
+                    ' has been successfully updated.'
+                );
+                res.redirect('/home');
+              }
+            });
         }
       }
     );
