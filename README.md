@@ -78,6 +78,8 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   active exclusion is being archived.
 - /home/archive - renders list of individuals who have previously been served an
   exclusion order, with the violations.
+  /exclusions_data - *WORKING* renders list of all excludable offenses, with
+  minimum suggested exclusion lengths.
 
 ### Users GET Routes
 
@@ -148,6 +150,11 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Added email confirmation for new exclusions - local/adding user and hard-coded
   admin user only - Greater functionality added to TODOs (below)
 
+## 10/4/2023
+- Improved UI - Hyperlink in new-exclusion.pug and edit-exclusion.pug for
+  labnol.org after/in Image URL label
+- Updated models/account.js - prepare for email notification overhaul
+
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
@@ -155,11 +162,11 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Add search feature to find active exclusions easier
 
 ## TODOS:
-- **Add section for minimum exclusion lengths
+- **Add section for minimum exclusion lengths (exclusions-criteria GET route)
 - **Fix exclusion length in edit form (why is it showing an input field vs dropdown?)
-- **Make email sending more fluid:
+- **TODO: Make email sending more fluid:
   - Allow "opt in" in user account for users to choose to be notified via email
     of new exclusions being added
 
-### Originally created: 11/29/2022; Last edited: 9/27/2023
+### Originally created: 11/29/2022; Last edited: 10/4/2023
  

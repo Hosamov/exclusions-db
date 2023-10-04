@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const Account = new Schema({
-  username: String,
+  username: String, // valid email address
   password: String,
   first_name: String,
   last_name: String,
@@ -11,6 +11,12 @@ const Account = new Schema({
   active: Boolean,
   loggedIn: Boolean, // track logged in status
   lastLoggedIn: String, 
+  notifications: { // Added 10/4/2023
+    newExclusion: Boolean,
+    editedExclusion: Boolean,
+    expiringSoon: Boolean,
+    expiredExclusion: Boolean,
+  }
 });
 
 Account.plugin(passportLocalMongoose);

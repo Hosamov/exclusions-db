@@ -325,7 +325,7 @@ router.get('/home/:exclusion_id/archive', (req, res, next) => {
 
 /* Exclusions-data GET route
 //* Displays a list of criteria for issuing exclusions */
-router.get('/exclusions-data', (req, res, next) => {
+router.get('/exclusions_data', (req, res, next) => {
   if (req.isAuthenticated()) {
     res.render('./exclusions/exclusions-criteria', {
       user: req.user,

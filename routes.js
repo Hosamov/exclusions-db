@@ -23,7 +23,7 @@ module.exports = function (app) {
     }
   });
 
-  //*********** POST ROUTES ************/
+  //*********** ALL POST ROUTES ************/
   //* Login POST route
   app.post('/login', (req, res) => {
     // Uses passport.js to authenticate user
@@ -185,7 +185,7 @@ module.exports = function (app) {
                           email(
                             'New User Registered - Exclusions DB',
                             `<p>Greetings, Admin!</p> ${emailBodies.new_account_admin} new user: ${foundUser.username} (${foundUser.first_name} ${foundUser.last_name})`,
-                            `hosamov@hotmail.com`
+                            process.env.ADMIN_EMAIL
                           ).catch(console.error);
                           console.log(
                             `New user, ${foundUser.first_name} ${foundUser.last_name} has been registered...`
@@ -353,8 +353,8 @@ module.exports = function (app) {
             email(
               'New Exclusion Order Added Successfully! - Exclusions DB',
               `<p>Greetings, ${req.user.first_name}!</p>
-               ${emailBodies.new_exclusion_added}<br> Date: ${excl.date_served} <br>Exclusion Length: ${excl.length}<br> Pending: ${excl.pending === undefined ? false : true}`,
-              [req.user.username, 'hosamov@hotmail.com' ] // Send email to current user and admin
+               ${emailBodies.new_exclusion_added}<br> Name: ${excl.last_name} ${excl.first_name}<br> Date: ${excl.date_served} <br>Exclusion Length: ${excl.length}<br> Pending: ${excl.pending === undefined ? false : true}`,
+              [req.user.username, process.env.ADMIN_EMAIL ] // Send email to current user and admin
             ).catch(console.error);
           res.redirect('/home');
         }
