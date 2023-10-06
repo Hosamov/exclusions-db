@@ -11,11 +11,12 @@ const Account = new Schema({
   active: Boolean,
   loggedIn: Boolean, // track logged in status
   lastLoggedIn: String, 
-  notifications: { // Added 10/4/2023
-    newExclusion: Boolean,
-    editedExclusion: Boolean,
-    expiringSoon: Boolean,
-    expiredExclusion: Boolean,
+  // Added 10/4/23 - For allowing users to receive emails for certain things
+  receiveEmail: { 
+    newExcl: Boolean, // Default: true
+    editedExcl: Boolean, // Default: false
+    expiresSoon: Boolean, // Default: false
+    expiredExcl: Boolean, // Default: true
   }
 });
 

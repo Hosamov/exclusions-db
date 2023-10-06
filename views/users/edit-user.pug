@@ -75,6 +75,26 @@ block content
           br
           input.form-control(type='password' name="confirm_password" placeholder='Confirm New Password')
           br 
+        //- Email Notifications:
+        p 
+          strong Receive email notifications for the following:
+        .notification-section
+          .notif-checkmark-section
+            label.notif-form-label(name='email_new_excl') New Exclusions 
+              br
+              input.notif-checkmark(type='checkbox' name='email_new_excl' checked=item.receiveEmail.newExcl)
+          .notif-checkmark-section
+            label.notif-form-label(name='email_edited_excl') Changed Exclusions 
+              br
+              input.notif-checkmark(type='checkbox' name='email_edited_excl' checked=item.receiveEmail.editedExcl)
+          .notif-checkmark-section
+            label.notif-form-label(name='excl_expires_soon') Expiring Soon 
+              br
+              input.notif-checkmark(type='checkbox' name='excl_expires_soon' checked=item.receiveEmail.expiresSoon)
+          .notif-checkmark-section
+            label.notif-form-label(name='email_expired_excl') Upon Expiration 
+              br
+              input.notif-checkmark(type='checkbox' name='email_expired_excl' checked=item.receiveEmail.expiredExcl)
         if user.role === 'admin'
           hr
           h4 Admin Only

@@ -155,6 +155,10 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   labnol.org after/in Image URL label
 - Updated models/account.js - prepare for email notification overhaul
 
+## 10/5/2023
+- Add checkboxes for opt-in notifications in /edit_user route
+  (edit-user.pug, routes.js) 
+
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.

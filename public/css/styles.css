@@ -386,6 +386,38 @@ fieldset {
   margin-right: 3%;
 }
 
+/*Start Email Notifications*/
+.notification-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.notif-checkmark-section {
+  padding: 5px;
+  border-radius: 15px;
+  text-align: center;
+  /* background-color: var(--charcoal_blue); */
+}
+
+.notif-checkmark {
+  height: 15px;
+  width: 15px;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+
+.notif-checkmark:hover {
+  cursor: pointer;
+  background-color: var(--blueCheck);
+}
+
+.notif-checkmark-section input:checked ~ .notif-checkmark {
+  background-color: var(--blueCheck);
+}
+
+/* End Email Notifications*/
+
 .pending-container {
   display: block;
   position: relative;
@@ -603,6 +635,22 @@ fieldset {
 .user-right {
   position: absolute;
   right: 5%;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-list-item {
+  list-style-type: none;
+  padding: 0 5px 0 5px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+}
+
+.user-settings-header {
+  margin: 10px 0 0 0;
 }
 
 .users-list-item {

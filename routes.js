@@ -124,7 +124,7 @@ module.exports = function (app) {
     }
   });
 
-  //* Register POST route
+  //* Register POST route (for user registration)
   app.post('/register', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -149,24 +149,28 @@ module.exports = function (app) {
                     if (err) {
                       console.log(err);
                     } else {
+                      const receiveEmail = foundUser.receiveEmail; //newExcl, editedExcl, expiresSoon, expiredExcl
                       foundUser.first_name = firstName;
                       foundUser.last_name = lastName;
                       foundUser.loggedIn = false;
+                      // Set defaults for receiveEmail:
+                      receiveEmail.newExcl = true;
+                      receiveEmail.editedExcl = false;
+                      receiveEmail.expiresSoon = false;
+                      receiveEmail.expiredExcl = true;
+                      // Check if userkey has been inputted, and if it matches criteria
                       if (userKey === process.env.ADMIN_KEY) {
-                        // Check if (admin) userkey has been inputted, and if it matches
-                        console.log('User Key Accepted!');
+                        //TODO later: change to switch statment
                         foundUser.role = 'admin';
                         foundUser.active = true;
                       } else if (userKey === process.env.SUPV_KEY) {
-                        console.log('User Key Accepted!');
                         foundUser.role = 'supervisor';
                         foundUser.active = true;
                       } else if (userKey === process.env.USER_KEY) {
-                        console.log('User Key Accepted!');
                         foundUser.role = 'user';
                         foundUser.active = true;
                       } else {
-                        console.log('Invalid user key/no key entered.');
+                        // Invalid user key/no key entered
                         foundUser.role = null;
                         foundUser.active = false;
                       }
@@ -202,11 +206,10 @@ module.exports = function (app) {
         })
         .catch((err) => {
           // If there is a reCAPTCHA error, redirect to /retry_login route
-          console.log('reCAPTCHA was not verified.');
           res.redirect('/register');
         });
     } else {
-      console.log('Registration failed!');
+      // Registration failure. Redirect to /register route:
       res.redirect('/register');
     }
   });
@@ -223,12 +226,18 @@ module.exports = function (app) {
       role: req.body.user_role,
       firstName: req.body.first_name,
       lastName: req.body.last_name,
+      // Email Notifications:
+      eNewExcl: req.body.email_new_excl,
+      eEditedExcl: req.body.email_edited_excl,
+      eExpiresSoon: req.body.email_expires_soon, //excl expires soon - LOL
+      eExpiredExcl: req.body.email_expired_excl,
     };
 
     Account.findOne({ username: userInfo.username }, async (err, foundUser) => {
       if (err) {
         console.log(err);
       } else {
+        const receiveEmail = foundUser.receiveEmail;
         // First, check if the user has updated their password:
         if (
           foundUser.newPassword === foundUser.confirmedPassword &&
@@ -267,6 +276,16 @@ module.exports = function (app) {
         foundUser.role = userInfo.role;
         foundUser.first_name = userInfo.firstName;
         foundUser.last_name = userInfo.lastName;
+        // Collect email notifications settings:
+        // Convert all to boolean values
+        receiveEmail.newExcl = 
+          userInfo.eNewExcl === 'on' || userInfo.eNewExcl === 'true' ? true : false;
+        receiveEmail.editedExcl = 
+          userInfo.eEditedExcl === 'on' || userInfo.eEditedExcl === 'true' ? true : false;
+        receiveEmail.expiresSoon =
+          userInfo.eExpiresSoon === 'on' || userInfo.eExpiresSoon === 'true' ? true : false;
+        receiveEmail.expiredExcl =
+          userInfo.eExpiredExcl === 'on' || userInfo.eExpiredExcl === 'true' ? true : false;
 
         await foundUser.save((err) => {
           if (err) {
@@ -349,13 +368,18 @@ module.exports = function (app) {
         if (err) {
           console.log(err);
         } else {
-            //* Send new exclusion success email:
-            email(
-              'New Exclusion Order Added Successfully! - Exclusions DB',
-              `<p>Greetings, ${req.user.first_name}!</p>
-               ${emailBodies.new_exclusion_added}<br> Name: ${excl.last_name} ${excl.first_name}<br> Date: ${excl.date_served} <br>Exclusion Length: ${excl.length}<br> Pending: ${excl.pending === undefined ? false : true}`,
-              [req.user.username, process.env.ADMIN_EMAIL ] // Send email to current user and admin
-            ).catch(console.error);
+          //* Send new exclusion added success email:
+          // TODO: include all users who've selected they wish to be notified
+          email(
+            'New Exclusion Order Added Successfully! - Exclusions DB',
+            `<p>Greetings, ${req.user.first_name}!</p>
+               ${emailBodies.new_exclusion_added}<br> Name: ${excl.last_name} ${
+              excl.first_name
+            }<br> Date: ${excl.date_served} <br>Exclusion Length: ${
+              excl.length
+            }<br> Pending: ${excl.pending === undefined ? false : true}`,
+            [req.user.username, process.env.ADMIN_EMAIL] // Send email to current user and admin
+          ).catch(console.error);
           res.redirect('/home');
         }
       }
