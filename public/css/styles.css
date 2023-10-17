@@ -347,7 +347,7 @@ textarea {
 .new-excl-btn:hover {
   cursor: pointer;
   background-color: var(--success);
-  color: var(--gray4);
+  color: var(--charcoal);
 }
 
 /** FILTER BUTTONS */

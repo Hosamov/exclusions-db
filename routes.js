@@ -278,14 +278,22 @@ module.exports = function (app) {
         foundUser.last_name = userInfo.lastName;
         // Collect email notifications settings:
         // Convert all to boolean values
-        receiveEmail.newExcl = 
-          userInfo.eNewExcl === 'on' || userInfo.eNewExcl === 'true' ? true : false;
-        receiveEmail.editedExcl = 
-          userInfo.eEditedExcl === 'on' || userInfo.eEditedExcl === 'true' ? true : false;
+        receiveEmail.newExcl =
+          userInfo.eNewExcl === 'on' || userInfo.eNewExcl === 'true'
+            ? true
+            : false;
+        receiveEmail.editedExcl =
+          userInfo.eEditedExcl === 'on' || userInfo.eEditedExcl === 'true'
+            ? true
+            : false;
         receiveEmail.expiresSoon =
-          userInfo.eExpiresSoon === 'on' || userInfo.eExpiresSoon === 'true' ? true : false;
+          userInfo.eExpiresSoon === 'on' || userInfo.eExpiresSoon === 'true'
+            ? true
+            : false;
         receiveEmail.expiredExcl =
-          userInfo.eExpiredExcl === 'on' || userInfo.eExpiredExcl === 'true' ? true : false;
+          userInfo.eExpiredExcl === 'on' || userInfo.eExpiredExcl === 'true'
+            ? true
+            : false;
 
         await foundUser.save((err) => {
           if (err) {
@@ -370,6 +378,7 @@ module.exports = function (app) {
         } else {
           //* Send new exclusion added success email:
           // TODO: include all users who've selected they wish to be notified
+
           email(
             'New Exclusion Order Added Successfully! - Exclusions DB',
             `<p>Greetings, ${req.user.first_name}!</p>
