@@ -18,17 +18,17 @@ const emailBodies = {
     <p>Thank you!</p>
     <br>
     <p>Backyard Dev</p>`,
+  //* Email body for admin to be notified of a new user account creation:
   new_account_admin: `
     <p> A new account has been created for the MTA Exclusions DB.</p>
     <p>Please click on the following link to view and activate the user: <a href="https://www.mta-exclusions.net">https://www.mta-exclusions.net</a>.</p>
     <p>Thank you!</p>
     <br>
     <p>Backyard Dev</p>`,
+  //* Email body for a new exclusion being added to the database:
   new_exclusion_added: `
-    <p> A new exclusion has been added within the MTA Exclusions DB.</p>
-    <p>Sincerely,</p>
-    <br>
-    <p>MTA Exclusions DB</p>`,
+    <p> A new exclusion has been added within the MTA Exclusions DB. Please see details below:</p>
+    `,
 };
 
 module.exports = emailBodies;

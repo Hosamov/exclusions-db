@@ -326,6 +326,7 @@ module.exports = function (app) {
       signature: req.body.signature,
       pending: req.body.pending,
     };
+    const emailList = [];
 
     // If other_length has a value, push that value to length instead.
     if (excl.other_length) {
@@ -351,7 +352,20 @@ module.exports = function (app) {
       excl.exp_date = dateServedPlus.addDays(parseInt(excl.length)); // Add days excl.date_served
     }
 
-    //* Insert data into DB:
+    //* Import email addresses of all users who selected to be notified
+    Account.find({ username: { $ne: null } }, (err, foundUsers) => {
+      foundUsers.forEach((user) => {
+        if (user.receiveEmail.newExcl)
+          emailList.push({
+            // object containing email and firstName for sending email
+            email: user.username.toString(),
+            firstName: user.first_name.toString(),
+          });
+      });
+      console.log(emailList);
+    });
+
+    // //* Insert data into DB:
     await Exclusion.create(
       [
         {
@@ -376,19 +390,21 @@ module.exports = function (app) {
         if (err) {
           console.log(err);
         } else {
-          //* Send new exclusion added success email:
-          // TODO: include all users who've selected they wish to be notified
-
-          email(
-            'New Exclusion Order Added Successfully! - Exclusions DB',
-            `<p>Greetings, ${req.user.first_name}!</p>
-               ${emailBodies.new_exclusion_added}<br> Name: ${excl.last_name} ${
-              excl.first_name
-            }<br> Date: ${excl.date_served} <br>Exclusion Length: ${
-              excl.length
-            }<br> Pending: ${excl.pending === undefined ? false : true}`,
-            [req.user.username, process.env.ADMIN_EMAIL] // Send email to current user and admin
-          ).catch(console.error);
+          //* Send new exclusion added success email to all applicable users:
+          emailList.forEach((emailUser) => {
+            email(
+              'New Exclusion Order Added Successfully! - Exclusions DB',
+              `<p>Greetings, ${emailUser.firstName}!</p>
+                ${emailBodies.new_exclusion_added}
+                Name: ${excl.last_name}, ${excl.first_name}<br> 
+                Date: ${excl.date_served}<br>
+                Exclusion Length: ${excl.length} days<br> 
+                ${excl.pending === undefined ? 'Not Pending' : 'Pending'} 
+                <p>Sincerely,</p>
+                <p>MTA Exclusions DB</p>`,
+              [emailUser.email] // Send email to current user
+            ).catch(console.error);
+          });
           res.redirect('/home');
         }
       }

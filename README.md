@@ -159,6 +159,10 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Add checkboxes for opt-in notifications in /edit_user route
   (edit-user.pug, routes.js) 
 
+## 10/18/2023
+- Implemented and tested ability for users (who have opted in) to receive email
+  notifications for newly added exclusion orders.
+
 ## PLANNED CHANGES/FEATURES:
 - Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
