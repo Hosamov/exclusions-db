@@ -164,7 +164,6 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   notifications for newly added exclusion orders.
 
 ## PLANNED CHANGES/FEATURES:
-- Email users - opt in to see when new exclusion has been added to the list
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
 - Add search feature to find active exclusions easier
@@ -172,9 +171,11 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 ## TODOS:
 - **Add section for minimum exclusion lengths (exclusions-criteria GET route)
 - **Fix exclusion length in edit form (why is it showing an input field vs dropdown?)
-- **TODO: Make email sending more fluid:
-  - Allow "opt in" in user account for users to choose to be notified via email
-    of new exclusions being added
+- **TODO: Complete email notifications:
+  - ✔ New exclusion
+  - ❌Changed exclusion
+  - ❌Expiring soon
+  - ❌Upon Expiration
 
 ### Originally created: 11/29/2022; Last edited: 10/4/2023
  
