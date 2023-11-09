@@ -59,25 +59,26 @@ block content
             input.form-control(type='hidden' name="is_active", value=`${item.active}`)
           .form-element
             input.form-control(type='hidden' name="user_role", value=`${item.role}`)
-
         .form-element
           label.form-label(name='current_password') Current Password
           br
-          input.form-control(type='password' name="current_password" placeholder='Current Password')
+          input.form-control(type='password' name="current_password" placeholder='Current Password' autocomplete='on')
           br
         .form-element
-          label.form-label(name='new_password') Change Password
+          label.form-label(name='new_password') New Password
           br
-          input.form-control(type='password' name="new_password" placeholder='New Password')
+          input.form-control(type='password' name="new_password" placeholder='New Password' autocomplete='on')
           br
         .form-element
           label.form-label(name='confirm_password') Confirm New Password
           br
-          input.form-control(type='password' name="confirm_password" placeholder='Confirm New Password')
+          input.form-control(type='password' name="confirm_password" placeholder='Confirm New Password' autocomplete='on')
           br 
+        if user.role === 'admin'
+          btn(class='btn' onclick=`displayModalwindow('Reset Password?', "Send a reset password link to user's email address on file?", '/users/${item.username}/reset_password', 'Yes')`) Reset Password
         //- Email Notifications:
         p 
-          strong Receive email notifications for the following:
+          strong Email Notifications Preferences:
         .notification-section
           .notif-checkmark-section
             label.notif-form-label(name='email_new_excl') New Exclusions 

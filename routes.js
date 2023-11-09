@@ -216,6 +216,8 @@ module.exports = function (app) {
 
   //* Edit_user POST route
   app.post('/edit_user', (req, res, next) => {
+    let passwordError = false; //track if there was an error with updating password
+
     // Edit a registered user from /edit_user GET route
     let userInfo = {
       username: req.body.email,
@@ -241,8 +243,9 @@ module.exports = function (app) {
         // First, check if the user has updated their password:
         if (
           foundUser.newPassword === foundUser.confirmedPassword &&
-          foundUser.newPassword !== ''
+          foundUser.newPassword !== '' && foundUser.newPassword !== undefined
         ) {
+          console.log(foundUser.newPassword);
           // https://alto-palo.com/blogs/nodejs-authentication-with-passportjs-passport-local-mongoose/
           foundUser.changePassword(
             userInfo.currentPassword,
@@ -250,15 +253,16 @@ module.exports = function (app) {
             (err, user) => {
               if (err) {
                 console.log(err);
+                passwordError = true;
               } else {
-                res.render('./users/account-success');
+                console.log(`Password successfully updated for ${user.username}`)
               }
             }
           );
         }
         // Post data to user account:
         foundUser.username = userInfo.username;
-        if (
+        if ( // Check if user account is being activated currently:
           foundUser.active === false &&
           (userInfo.active === 'on' || userInfo.active === 'true')
         ) {
@@ -269,7 +273,7 @@ module.exports = function (app) {
              ${emailBodies.account_activated_body}`,
             foundUser.username
           ).catch(console.error);
-          foundUser.active = true;
+          foundUser.active = true; 
         }
         foundUser.active =
           userInfo.active === 'on' || userInfo.active === 'true' ? true : false;
@@ -299,12 +303,19 @@ module.exports = function (app) {
           if (err) {
             console.log(err);
           } else {
+            console.log('passwordError: ' + passwordError)
             console.log(foundUser.username + ' has been successfully updated.');
             res.render('./users/account-success', { user: userInfo });
           }
         });
       }
     });
+  });
+
+  //* reset_password POST route
+  //! WORKING HERE
+  app.post('/reset_password', async (req, res, next) =>{
+
   });
 
   //* Add_exclusion POST route
@@ -393,12 +404,16 @@ module.exports = function (app) {
           //* Send new exclusion added success email to all applicable users:
           emailList.forEach((emailUser) => {
             email(
-              'New Exclusion Order Added Successfully! - Exclusions DB',
+              'New Exclusion Order Added - Exclusions DB',
               `<p>Greetings, ${emailUser.firstName}!</p>
                 ${emailBodies.new_exclusion_added}
                 Name: ${excl.last_name}, ${excl.first_name}<br> 
                 Date: ${excl.date_served}<br>
-                Exclusion Length: ${excl.length} days<br> 
+                Exclusion Length: ${excl.length} ${
+                excl.length == 'lifetime' || excl.length == 'infinity'
+                  ? ''
+                  : 'days'
+              }<br> 
                 ${excl.pending === undefined ? 'Not Pending' : 'Pending'} 
                 <p>Sincerely,</p>
                 <p>MTA Exclusions DB</p>`,

@@ -163,6 +163,15 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Implemented and tested ability for users (who have opted in) to receive email
   notifications for newly added exclusion orders.
 
+## 11/8/2023
+- Add a new users/:user/reset_password GET route for sending users a reset
+  password email for users to reset their own password. It is still in the
+  "brainstorm" phase.
+
+## 11/9/2023
+- Removed users/:user/reset_password GET Route
+- Added /reset_password POST route
+
 ## PLANNED CHANGES/FEATURES:
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
@@ -176,6 +185,10 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   - ❌Changed exclusion
   - ❌Expiring soon
   - ❌Upon Expiration
+- **Fix bug: routes.js: edit_user POST route - password updates, should show
+  the user an error if it doesn't match,and break from saving the data,
+  potentially crashing the server.
+- **Add ability for users to reset their password via "forgot password" link.
 
 ### Originally created: 11/29/2022; Last edited: 10/4/2023
  
