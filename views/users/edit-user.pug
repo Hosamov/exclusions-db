@@ -59,23 +59,6 @@ block content
             input.form-control(type='hidden' name="is_active", value=`${item.active}`)
           .form-element
             input.form-control(type='hidden' name="user_role", value=`${item.role}`)
-        .form-element
-          label.form-label(name='current_password') Current Password
-          br
-          input.form-control(type='password' name="current_password" placeholder='Current Password' autocomplete='on')
-          br
-        .form-element
-          label.form-label(name='new_password') New Password
-          br
-          input.form-control(type='password' name="new_password" placeholder='New Password' autocomplete='on')
-          br
-        .form-element
-          label.form-label(name='confirm_password') Confirm New Password
-          br
-          input.form-control(type='password' name="confirm_password" placeholder='Confirm New Password' autocomplete='on')
-          br 
-        if user.role === 'admin'
-          btn(class='btn' onclick=`displayModalwindow('Reset Password?', "Send a reset password link to user's email address on file?", '/users/${item.username}/reset_password', 'Yes')`) Reset Password
         //- Email Notifications:
         p 
           strong Email Notifications Preferences:
@@ -96,62 +79,83 @@ block content
             label.notif-form-label(name='email_expired_excl') Upon Expiration 
               br
               input.notif-checkmark(type='checkbox' name='email_expired_excl' checked=item.receiveEmail.expiredExcl)
+        hr
         if user.role === 'admin'
-          hr
           h4 Admin Only
-          .admin-section
-            fieldset
-              .radio-section
-                label.admin-form-label(name='is_active') Set Active: 
-                  input.admin-form-control(type='checkbox' name='is_active' checked=item.active) 
-            fieldset
-              .radio-section
-                if item.role === 'admin'
-                  label.admin-form-label(for='user') User (read access)
-                    input.admin-form-control(type='radio' name='user_role' value='user')
-                  label.admin-form-label(for='supervisor') Supervisor (read/write access)
-                    input.admin-form-control(type='radio' name='user_role' value='supervisor')
-                  label.admin-form-label(for='admin') Admin (Warning: Full access)
-                    input.admin-form-control(type='radio' name='user_role' value='admin' checked)
-                  label.admin-form-label(for='inactive') No Access
-                    input.admin-form-control(type='radio' name='user_role' value='inactive')
-                  br
-                else if item.role === 'supervisor'
-                  label.admin-form-label(for='user') User (read access)
-                    input.admin-form-control(type='radio' name='user_role' value='user')
-                  label.admin-form-label(for='supervisor') Supervisor (read/write access)
-                    input.admin-form-control(type='radio' name='user_role' value='supervisor' checked)
-                  label.admin-form-label(for='admin') Admin (Warning: Full access)
-                    input.admin-form-control(type='radio' name='user_role' value='admin')
-                  label.admin-form-label(for='inactive') No Access
-                    input.admin-form-control(type='radio' name='user_role' value='inactive')
-                  br
-                else if item.role === 'user'
-                  label.admin-form-label(for='user') User (read access)
-                    input.admin-form-control(type='radio' name='user_role' value='user' checked)
-                  label.admin-form-label(for='supervisor') Supervisor (read/write access)
-                    input.admin-form-control(type='radio' name='user_role' value='supervisor')
-                  label.admin-form-label(for='admin') Admin (Warning: Full access)
-                    input.admin-form-control(type='radio' name='user_role' value='admin')
-                  label.admin-form-label(for='inactive') No Access
-                    input.admin-form-control(type='radio' name='user_role' value='inactive')
-                  br
-                else if item.role === '' || item.role === undefined || !item.active
-                  label.admin-form-label(for='user') User (read access)
-                    input.admin-form-control(type='radio' name='user_role' value='user')
-                  label.admin-form-label(for='supervisor') Supervisor (read/write access)
-                    input.admin-form-control(type='radio' name='user_role' value='supervisor')
-                  label.admin-form-label(for='admin') Admin (Warning: Full access)
-                    input.admin-form-control(type='radio' name='user_role' value='admin')
-                  label.admin-form-label(for='inactive') No Access
-                    input.admin-form-control(type='radio' name='user_role' value='inactive' checked)
-                  br
-          br
+            .admin-section
+              fieldset
+                .radio-section
+                  label.admin-form-label(name='is_active') Set Active User: 
+                    input.admin-form-control(type='checkbox' name='is_active' checked=item.active) 
+              fieldset
+                .radio-section
+                  if item.role === 'admin'
+                    label.admin-form-label(for='user') User (read access)
+                      input.admin-form-control(type='radio' name='user_role' value='user')
+                    label.admin-form-label(for='supervisor') Supervisor (read/write access)
+                      input.admin-form-control(type='radio' name='user_role' value='supervisor')
+                    label.admin-form-label(for='admin') Admin (Warning: Full access)
+                      input.admin-form-control(type='radio' name='user_role' value='admin' checked)
+                    label.admin-form-label(for='inactive') No Access
+                      input.admin-form-control(type='radio' name='user_role' value='inactive')
+                    br
+                  else if item.role === 'supervisor'
+                    label.admin-form-label(for='user') User (read access)
+                      input.admin-form-control(type='radio' name='user_role' value='user')
+                    label.admin-form-label(for='supervisor') Supervisor (read/write access)
+                      input.admin-form-control(type='radio' name='user_role' value='supervisor' checked)
+                    label.admin-form-label(for='admin') Admin (Warning: Full access)
+                      input.admin-form-control(type='radio' name='user_role' value='admin')
+                    label.admin-form-label(for='inactive') No Access
+                      input.admin-form-control(type='radio' name='user_role' value='inactive')
+                    br
+                  else if item.role === 'user'
+                    label.admin-form-label(for='user') User (read access)
+                      input.admin-form-control(type='radio' name='user_role' value='user' checked)
+                    label.admin-form-label(for='supervisor') Supervisor (read/write access)
+                      input.admin-form-control(type='radio' name='user_role' value='supervisor')
+                    label.admin-form-label(for='admin') Admin (Warning: Full access)
+                      input.admin-form-control(type='radio' name='user_role' value='admin')
+                    label.admin-form-label(for='inactive') No Access
+                      input.admin-form-control(type='radio' name='user_role' value='inactive')
+                    br
+                  else if item.role === '' || item.role === undefined || !item.active
+                    label.admin-form-label(for='user') User (read access)
+                      input.admin-form-control(type='radio' name='user_role' value='user')
+                    label.admin-form-label(for='supervisor') Supervisor (read/write access)
+                      input.admin-form-control(type='radio' name='user_role' value='supervisor')
+                    label.admin-form-label(for='admin') Admin (Warning: Full access)
+                      input.admin-form-control(type='radio' name='user_role' value='admin')
+                    label.admin-form-label(for='inactive') No Access
+                      input.admin-form-control(type='radio' name='user_role' value='inactive' checked)
+                    br
+            br
 
         .form-button
           button.btn.btn-default.list-btn(type='submit') Submit
-      hr
       button.btn.btn-default.list-btn(onclick="history.back()") Cancel
+        
+      if user.role === 'admin'
+        hr
+        form(role='form' id='signup' action="/reset_password" method="post")
+          //- .form-element
+          //-   label.form-label(name='current_password') Current Password
+          //-   br
+          //-   input.form-control(type='password' name="current_password" placeholder='Current Password' autocomplete='on')
+          //-   br
+          .form-element
+            label.form-label(name='new_password') New Password
+            br
+            input.form-control(id="password" type='password' name="new_password" placeholder='New Password' autocomplete='off')
+            br
+          .form-element
+            label.form-label(name='confirm_password') Confirm New Password
+            br
+            input.form-control(id="confirm_password" type='password' name="confirm_password" placeholder='Confirm New Password' autocomplete='off')
+            br 
+          button.btn.btn-default(type='submit') Reset Password
+          br
+
 
       #modal
       script(src='/static/js/display_modal.js')

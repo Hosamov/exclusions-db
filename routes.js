@@ -312,10 +312,37 @@ module.exports = function (app) {
     });
   });
 
-  //* reset_password POST route
-  //! WORKING HERE
+  // //* reset_password POST route
+  // //! WORKING HERE
   app.post('/reset_password', async (req, res, next) =>{
+  //   const user = req.body.username;
 
+  //   Account.findOne({ username: user }, async (err, foundUser) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       const receiveEmail = foundUser.receiveEmail;
+  //       // First, check if the user has updated their password:
+  //       if (
+  //         foundUser.newPassword === foundUser.confirmedPassword &&
+  //         foundUser.newPassword !== '' && foundUser.newPassword !== undefined
+  //       ) {
+  //         console.log(foundUser.newPassword);
+  //         // https://alto-palo.com/blogs/nodejs-authentication-with-passportjs-passport-local-mongoose/
+  //         foundUser.changePassword(
+  //           userInfo.currentPassword,
+  //           userInfo.newPassword,
+  //           (err, user) => {
+  //             if (err) {
+  //               console.log(err);
+  //               passwordError = true;
+  //             } else {
+  //               console.log(`Password successfully updated for ${user.username}`)
+  //             }
+  //           }
+  //         );
+  //       }
+  //     }
   });
 
   //* Add_exclusion POST route

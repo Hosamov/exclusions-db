@@ -170,7 +170,10 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## 11/9/2023
 - Removed users/:user/reset_password GET Route
-- Added /reset_password POST route
+- Added /reset_password POST route (non-functional as of 11/9)
+
+## 11/22/2023
+- Worked on adding node-cron in app.js (for scheduling emails)
 
 ## PLANNED CHANGES/FEATURES:
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
