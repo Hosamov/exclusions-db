@@ -174,6 +174,13 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## 11/22/2023
 - Worked on adding node-cron package in app.js (for scheduling emails)
+  - Still working on this...
+
+## 12/20/2023
+- Removed password reset section from /edit_user route
+- Adjusted header/banner to include text as well as icons for larger screens
+- Setup basic password reset route and template (currently inactive...
+  brainstorming how to tackle this one)
 
 ## PLANNED CHANGES/FEATURES:
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
@@ -191,6 +198,8 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - **Fix bug: routes.js: edit_user POST route - password updates, should show
   the user an error if it doesn't match,and break from saving the data, instead of
   potentially crashing the server. (tested 11/9 in prod...and it's a sucky one)
+  - REMOVE change password in user settings; instead add a "Reset Password" link
+    in the /login route
 - **Add ability for users to reset their password via "forgot password" link.
 
 ### Originally created: 11/29/2022; Last edited: 11/22/2023

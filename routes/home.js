@@ -123,7 +123,6 @@ router.get('/home', async (req, res, next) => {
               filter: filter,
               sort: srt, // TODO: Delete this in future iteration?
               date: today, // today's date
-              // TODO: Include total amount of exclusions
             });
           } else {
             res.redirect('/error');

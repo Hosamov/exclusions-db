@@ -347,7 +347,7 @@ textarea {
 .new-excl-btn:hover {
   cursor: pointer;
   background-color: var(--success);
-  color: var(--charcoal);
+  color: var(--gray1);
 }
 
 /** FILTER BUTTONS */
@@ -417,6 +417,13 @@ fieldset {
 }
 
 /* End Email Notifications*/
+
+.buttons-section { /*Specifically used in /edit_user route */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
 
 .pending-container {
   display: block;

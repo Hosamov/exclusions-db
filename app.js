@@ -6,16 +6,6 @@ const session = require('express-session');
 const memoryStore = require('memorystore')(session); // used with express-session(?)
 const cron = require('node-cron');
 
-
-//TODO: Add daily tasks here
-//! Check for expired or soon-expiring exclusions, send emails based on data.
-cron.schedule('0 1 * * *', () => {
-  console.log('Running scheduled task at 01:00 PST');
-}, {
-  scheduled: true,
-  timezone: 'America/Los_Angeles'
-})
-
 require('dotenv/config');
 
 // Passport Config
@@ -27,6 +17,15 @@ passport.deserializeUser(Account.deserializeUser());
 
 // Initialize DB:
 require('./initDB')();
+
+//TODO: cron-job - Add daily tasks here
+//! Check for expired (today) or soon-expiring exclusions, send emails based on data.
+cron.schedule('0 1 * * *', () => {
+  console.log('Running scheduled task at 01:00 PST');
+}, {
+  scheduled: true,
+  timezone: 'America/Los_Angeles'
+})
 
 const app = express();
 

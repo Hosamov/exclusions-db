@@ -8,20 +8,21 @@ block header
     li.menu-item
       a(href='/home')
         i.fas-icon-light.menu-icon(class="fa-solid fa-house-user") 
-        h4.menu-text Home/Active List
+          h4.menu-text Home
     if user.role === 'admin'
       li.menu-item 
         a(href='/users')
           i.fas-icon-light.menu-icon(class="fa-solid fa-users") 
-          h4.menu-text Users
+            h4.menu-text Users
     li.menu-item 
       a(href=`/users/${user.username}`)
-        i.fas-icon-light.menu-icon(class="fa-solid fa-gear")
-        h4.menu-text Account
+        i.fas-icon-light.menu-icon(class="fa-solid fa-gear") 
+          h4.menu-text Account
     li.menu-item
       form(id='logout' action="/logout" method="post")
         i.fas-icon-light-menu.menu-icon-logout(id="logout-icon" class="fa-solid fa-right-from-bracket")
-          btn(type="submit")
+          btn(type="submit") 
+          h4.menu-text Logout
 block content 
   div.main-container
     each item in foundUser
@@ -130,32 +131,10 @@ block content
                       input.admin-form-control(type='radio' name='user_role' value='inactive' checked)
                     br
             br
-
-        .form-button
-          button.btn.btn-default.list-btn(type='submit') Submit
-      button.btn.btn-default.list-btn(onclick="history.back()") Cancel
-        
-      if user.role === 'admin'
-        hr
-        form(role='form' id='signup' action="/reset_password" method="post")
-          //- .form-element
-          //-   label.form-label(name='current_password') Current Password
-          //-   br
-          //-   input.form-control(type='password' name="current_password" placeholder='Current Password' autocomplete='on')
-          //-   br
-          .form-element
-            label.form-label(name='new_password') New Password
-            br
-            input.form-control(id="password" type='password' name="new_password" placeholder='New Password' autocomplete='off')
-            br
-          .form-element
-            label.form-label(name='confirm_password') Confirm New Password
-            br
-            input.form-control(id="confirm_password" type='password' name="confirm_password" placeholder='Confirm New Password' autocomplete='off')
-            br 
-          button.btn.btn-default(type='submit') Reset Password
-          br
-
+        .buttons-section
+          .form-button
+            button.btn.btn-default.list-btn(type='submit') Submit
+          button.btn.btn-default.list-btn(type='button' onclick="history.back()") Cancel
 
       #modal
       script(src='/static/js/display_modal.js')

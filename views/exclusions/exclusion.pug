@@ -8,20 +8,21 @@ block header
     li.menu-item
       a(href='/home')
         i.fas-icon-light.menu-icon(class="fa-solid fa-house-user") 
-        h4.menu-text Home/Active List
+          h4.menu-text Home
     if user.role === 'admin'
       li.menu-item 
         a(href='/users')
           i.fas-icon-light.menu-icon(class="fa-solid fa-users") 
-          h4.menu-text Users
+           h4.menu-text Users
     li.menu-item 
       a(href=`/users/${user.username}`)
-        i.fas-icon-light.menu-icon(class="fa-solid fa-gear")
-        h4.menu-text Account
+        i.fas-icon-light.menu-icon(class="fa-solid fa-gear") 
+          h4.menu-text Account
     li.menu-item
       form(id='logout' action="/logout" method="post")
         i.fas-icon-light-menu.menu-icon-logout(id="logout-icon" class="fa-solid fa-right-from-bracket")
           btn(type="submit")  
+          h4.menu-text Logout
 block content 
   div.excl-container
     .left-btn-div

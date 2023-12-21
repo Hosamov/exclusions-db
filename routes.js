@@ -160,7 +160,7 @@ module.exports = function (app) {
                       receiveEmail.expiredExcl = true;
                       // Check if userkey has been inputted, and if it matches criteria
                       if (userKey === process.env.ADMIN_KEY) {
-                        //TODO later: change to switch statment
+                        //TODO later: change to switch statement
                         foundUser.role = 'admin';
                         foundUser.active = true;
                       } else if (userKey === process.env.SUPV_KEY) {
@@ -315,34 +315,7 @@ module.exports = function (app) {
   // //* reset_password POST route
   // //! WORKING HERE
   app.post('/reset_password', async (req, res, next) =>{
-  //   const user = req.body.username;
-
-  //   Account.findOne({ username: user }, async (err, foundUser) => {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       const receiveEmail = foundUser.receiveEmail;
-  //       // First, check if the user has updated their password:
-  //       if (
-  //         foundUser.newPassword === foundUser.confirmedPassword &&
-  //         foundUser.newPassword !== '' && foundUser.newPassword !== undefined
-  //       ) {
-  //         console.log(foundUser.newPassword);
-  //         // https://alto-palo.com/blogs/nodejs-authentication-with-passportjs-passport-local-mongoose/
-  //         foundUser.changePassword(
-  //           userInfo.currentPassword,
-  //           userInfo.newPassword,
-  //           (err, user) => {
-  //             if (err) {
-  //               console.log(err);
-  //               passwordError = true;
-  //             } else {
-  //               console.log(`Password successfully updated for ${user.username}`)
-  //             }
-  //           }
-  //         );
-  //       }
-  //     }
+    console.log('Reset Password POST Route reached.')
   });
 
   //* Add_exclusion POST route

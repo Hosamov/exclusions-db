@@ -24,4 +24,12 @@ router.get('/retry_login', (req, res, next) => {
   });
 });
 
+//* Retry_login GET route
+//* Render retry-login template with recaptcha
+router.get('/reset_password', (req, res, next) => {
+  res.render('./auth/reset-password', {
+    recaptcha: recaptcha.formElement(),
+  });
+});
+
 module.exports = router;

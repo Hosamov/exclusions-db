@@ -7,6 +7,8 @@ block content
     form.login-form(role='form', action="/login",method="post")
       .form-element
         br
+        label.form-label(name='username') Email/Username
+        br
         input.form-control(type='text', name="username", placeholder='Enter Username' required)
         br
       .form-element
@@ -15,11 +17,14 @@ block content
         input.form-control(type='password', name="password", placeholder='Password' required)
         br
         br
+        a(href='/reset_password') 
+          small Forgot Password
       p!= recaptcha
       .form-button
         button.btn.btn-default(type='submit') Login
         a(href='/')
           button.btn.btn-primary(type="button") Cancel
+        
        
 
         

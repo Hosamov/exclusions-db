@@ -15,6 +15,12 @@
   --success: #19bf2c;
 }
 
+@media only screen and (min-width: 1500px) { 
+  .menu-icon {display:inline-block}
+  .menu-text {display: inline-block}
+}
+
+
 @media only screen and (max-width: 1420px) {
   .main-container {
     width: 75%;
@@ -27,6 +33,8 @@
 }
 
 @media only screen and (max-width: 1000px) {
+  .menu-icon {display: inline-block}
+  .menu-text {display: none }
   body {
     font-size: 13pt;
   }
