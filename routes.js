@@ -330,6 +330,7 @@ module.exports = function (app) {
       description: req.body.description,
       detailed_description: req.body.detailed_description,
       date_served: moment(req.body.date_served).format('YYYY-MM-DD'),
+      date_added: moment().format('MM/DD/YYYY'),
       exp_date: req.body.exp_date,
       length: req.body.length, //Note: is converted to a string for 'Lifetime'
       other_length: req.body.other_length,
@@ -351,7 +352,7 @@ module.exports = function (app) {
       date.setDate(date.getDate() + days);
       return date;
     };
-
+    
     const dateServed = new Date(excl.date_served);
     const dateServedPlus = dateServed.addDays(1);
     console.log(dateServed, dateServedPlus);
@@ -388,6 +389,7 @@ module.exports = function (app) {
           description: excl.description,
           detailed_description: excl.detailed_description,
           date_served: moment(excl.date_served.toString()).format('MM/DD/YYYY'),
+          date_added: excl.date_added,
           exp_date: moment(excl.exp_date.toString()).format('MM/DD/YYYY'), // convert to string due to "Lifetime"
           length: excl.length === 'Lifetime' ? Infinity : excl.length,
           img_url: excl.img_url,
@@ -408,7 +410,7 @@ module.exports = function (app) {
               `<p>Greetings, ${emailUser.firstName}!</p>
                 ${emailBodies.new_exclusion_added}
                 Name: ${excl.last_name}, ${excl.first_name}<br> 
-                Date: ${excl.pending ? 'Pending' : excl.date_served}<br>
+                Date: ${excl.date_added}<br>
                 Exclusion Length: ${excl.length} ${
                 excl.length == 'lifetime' || excl.length == 'infinity'
                   ? ''

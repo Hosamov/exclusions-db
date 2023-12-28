@@ -149,9 +149,7 @@ li.menu-item:hover {
 }
 
 .menu-icon {
-  /* font-size: 0; */
   display: block;
-  /* visibility: hidden; */
 }
 
 .menu-text {
@@ -159,7 +157,6 @@ li.menu-item:hover {
   margin: 0;
   display: none;
   font-weight: 1;
-  /* font-size: 0; */
 }
 
 a.header-link {
@@ -183,10 +180,8 @@ a.header-link {
 }
 
 .content-title {
-  /* background-color: var(--gray3); */
   border-radius: 5px;
   padding: 5px;
-  /* box-shadow: 1px 1px 2px 2px var(--gray4); */
   margin: 0;
 }
 
@@ -294,8 +289,7 @@ textarea {
   max-height: 40px;
 }
 
-/* User Home*/
-
+/** User Home*/
 .form-label {
   font-size: 1.1rem;
 }
@@ -387,7 +381,7 @@ fieldset {
   margin-right: 3%;
 }
 
-/*Start Email Notifications*/
+/** Start Email Notifications*/
 .notification-section {
   display: flex;
   flex-direction: row;
@@ -398,7 +392,6 @@ fieldset {
   padding: 5px;
   border-radius: 15px;
   text-align: center;
-  /* background-color: var(--charcoal_blue); */
 }
 
 .notif-checkmark {
@@ -417,7 +410,7 @@ fieldset {
   background-color: var(--blueCheck);
 }
 
-/* End Email Notifications*/
+/** End Email Notifications*/
 
 .buttons-section { /*Specifically used in /edit_user route */
   display: flex;
@@ -486,14 +479,6 @@ fieldset {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/*Checkbox*/
-/* .checkmark { 
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-} */
 
 .btn{
   border-radius: 5px;
@@ -518,7 +503,7 @@ fieldset {
   cursor: pointer;
 }
 
-/* Houses delete_confirm div*/ 
+/** Houses delete_confirm div*/ 
 .btn-container {
   text-align: center;
 }
@@ -693,7 +678,6 @@ fieldset {
 .excl-head {
   width: 100%;
   display: inline-block;
-  /* background: red; */
 }
 
 .excl-title {
@@ -701,7 +685,6 @@ fieldset {
 }
 
 .logo {
-  /* background-color: #3a3b3d; */
   border-radius: 10px;
   max-width: 200px;
   float: left;
@@ -760,49 +743,6 @@ fieldset {
   border-color: var(--error);
 }
 
-
-/* Tooltip
-.tooltip {
-  display:inline-block;
-  position:relative;
-  border-bottom:1px dotted #666;
-  text-align:left;
-}
-
-.tooltip .bottom {
-  min-width:50px; 
-  max-width:200px;
-  top:40px;
-  left:50%;
-  transform:translate(-1, 0);
-  padding:10px 20px;
-  color:#444444;
-  background-color:#EEEEEE;
-  font-weight:normal;
-  font-size:13px;
-  border-radius:8px;
-  position:absolute;
-  z-index:2;
-  box-sizing:border-box;
-  box-shadow:0 1px 8px rgba(0,0,0,0.5);
-  visibility:hidden; opacity:0; transition:opacity 0.8s;
-}
-
-.tooltip:hover .bottom {
-  visibility:visible; opacity:1;
-}
-
-.tooltip .bottom i {
-  position:absolute;
-  bottom:100%;
-  left: 10px;
-  margin-left:-12px;
-  width:24px;
-  height:12px;
-  overflow:hidden;
-}
-*/
-
 .tooltip .bottom i::after {
   content:'';
   position:absolute;
@@ -819,7 +759,6 @@ fieldset {
 .tooltip {
   position: relative;
   display: inline-block;
-  /* border-bottom: 1px dotted var(--charcoal); */
 }
 
 .tooltip .tooltiptext {
@@ -834,7 +773,7 @@ fieldset {
   padding: 4px 4px;
   font-size: 1rem;
   
-  /* Position the tooltip */
+  /** Position the tooltip */
   position: absolute;
   min-width: 120px;
   max-width: 300px;
@@ -846,17 +785,6 @@ fieldset {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-
-/* .tooltip .tooltiptext::after {
-  content: " ";
-  position: absolute;
-  bottom: 100%;  
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent var(--charcoal) transparent;
-} */
 
 /** Modal Window */
 
@@ -899,10 +827,6 @@ fieldset {
   border-radius: 0.25em;
   bottom: 20px;
 }
-
-/* #action-btn:hover {
-  border: 2px solid yellow;
-} */
 
 .modal-close-btn {
   position: absolute;

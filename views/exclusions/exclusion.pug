@@ -56,7 +56,7 @@ block content
     div.excl-body
       img.excl-picture(src=`${exclusion.img_url}`)
       p Date: 
-        strong #{(!exclusion.pending) ? exclusion.date_served : '__/__/____'}
+        strong #{(exclusion.date_added) ? exclusion.date_added : (!exclusion.pending) ? exclusion.date_served : '__/__/____'}
       p EXCLUDED PERSON: 
         strong #{exclusion.first_name} #{exclusion.last_name} 
       p This exclusion is effective:  

@@ -7,9 +7,10 @@ const ExclusionSchema = new Schema({
   dob: String,
   other_info: String,
   ordinance: String,
-  description: String,
-  detailed_description: String,
-  date_served: String,
+  description: String, 
+  detailed_description: String, 
+  date_served: String, // For tracking when the exclusion was served
+  date_added: String, // For tracking when the exclusion was created
   exp_date: String,
   length: String,
   img_url: String,

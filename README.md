@@ -184,6 +184,11 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Adjusted wording (improve UI) in email notification for a new exclusion being added
 - ✔ Found and fixed bug: Mobile menu was not displaying text, except last li (logout)
   - mobile.css - .fas-icon-light
+- Fixed new exclusion email to show a date instead of 'Invalid Date' when no
+  date is selected by the user who added it.
+- ✔ Added 'date_added' to exclusion schema, made edits to use this as 'Date' on
+  exclusions moving forward. Past exclusions will still use 'date_served'. Past
+  pending exclusions will still use '__/__/____'
 
 ## PLANNED CHANGES/FEATURES:
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
@@ -204,8 +209,6 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   - REMOVE change password in user settings; instead add a "Reset Password" link
     in the /login route
   - **Add ability for users to reset their password via "forgot password" link.
-- TODO: Add new/separate date for "created on"; does not have to be for older
-  exclusions, just the new ones added at/past the date implemented.
 
 ### Originally created: 11/29/2022; Last edited: 11/22/2023
  
