@@ -189,21 +189,23 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
 - Add search feature to find active exclusions easier
-
+- Add section for minimum exclusion lengths (exclusions-criteria GET route)
+- 
 ## TODOS:
-- **Add section for minimum exclusion lengths (exclusions-criteria GET route)
-- **Fix exclusion length in edit form (why is it showing an input field vs dropdown?)
+- **TODO: Fix exclusion length in edit form (why is it showing an input field vs dropdown?)
 - **TODO: Complete email notifications:
   - ✔ New exclusion
   - ❌Changed exclusion
   - ❌Expiring soon
   - ❌Upon Expiration
-- **Fix bug: routes.js: edit_user POST route - password updates, should show
+- **TODO: Fix bug: routes.js: edit_user POST route - password updates, should show
   the user an error if it doesn't match,and break from saving the data, instead of
   potentially crashing the server. (tested 11/9 in prod...and it's a sucky one)
   - REMOVE change password in user settings; instead add a "Reset Password" link
     in the /login route
   - **Add ability for users to reset their password via "forgot password" link.
+- TODO: Add new/separate date for "created on"; does not have to be for older
+  exclusions, just the new ones added at/past the date implemented.
 
 ### Originally created: 11/29/2022; Last edited: 11/22/2023
  
