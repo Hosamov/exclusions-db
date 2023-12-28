@@ -107,7 +107,7 @@ a:active {
 }
 
 li.menu-item {
-  z-index: 3
+  z-index: 3;
 }
 
 li.menu-item:hover {
@@ -158,6 +158,7 @@ li.menu-item:hover {
   padding: 0;
   margin: 0;
   display: none;
+  font-weight: 1;
   /* font-size: 0; */
 }
 

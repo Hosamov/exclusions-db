@@ -4,7 +4,6 @@ A exclusions database that is web-based using Node, express and
 MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 ## Technologies:
-
 - Node.js
 - Express.js
 - MongoDB/Mongoose
@@ -12,7 +11,6 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Passport.js
 
 ## Features
-
 - User authentication:
   - Google reCAPTCHA
   - Username and password (single-factor)
@@ -182,6 +180,11 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Setup basic password reset route and template (currently inactive...
   brainstorming how to tackle this one)
 
+## 12/28/2023
+- Adjusted wording (improve UI) in email notification for a new exclusion being added
+- ✔ Found and fixed bug: Mobile menu was not displaying text, except last li (logout)
+  - mobile.css - .fas-icon-light
+
 ## PLANNED CHANGES/FEATURES:
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
@@ -200,7 +203,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   potentially crashing the server. (tested 11/9 in prod...and it's a sucky one)
   - REMOVE change password in user settings; instead add a "Reset Password" link
     in the /login route
-- **Add ability for users to reset their password via "forgot password" link.
+  - **Add ability for users to reset their password via "forgot password" link.
 
 ### Originally created: 11/29/2022; Last edited: 11/22/2023
  

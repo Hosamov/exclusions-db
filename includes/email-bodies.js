@@ -27,7 +27,7 @@ const emailBodies = {
     <p>Backyard Dev</p>`,
   //* Email body for a new exclusion being added to the database:
   new_exclusion_added: `
-    <p> A new exclusion has been added within the MTA Exclusions DB. Please see details below:</p>
+    <p> This email serves as a notification to inform you that a new exclusion has been added to the MTA Exclusions Database (DB). Please see details below:</p>
     `,
 };
 

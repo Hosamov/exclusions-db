@@ -404,17 +404,17 @@ module.exports = function (app) {
           //* Send new exclusion added success email to all applicable users:
           emailList.forEach((emailUser) => {
             email(
-              'New Exclusion Order Added - Exclusions DB',
+              'Exclusions DB: New Exclusion Order Added',
               `<p>Greetings, ${emailUser.firstName}!</p>
                 ${emailBodies.new_exclusion_added}
                 Name: ${excl.last_name}, ${excl.first_name}<br> 
-                Date: ${excl.date_served}<br>
+                Date: ${excl.pending ? 'Pending' : excl.date_served}<br>
                 Exclusion Length: ${excl.length} ${
                 excl.length == 'lifetime' || excl.length == 'infinity'
                   ? ''
                   : 'days'
               }<br> 
-                ${excl.pending === undefined ? 'Not Pending' : 'Pending'} 
+                Status: ${excl.pending === undefined ? 'Active/Served' : 'Currently Pending'} 
                 <p>Sincerely,</p>
                 <p>MTA Exclusions DB</p>`,
               [emailUser.email] // Send email to current user
