@@ -190,6 +190,12 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   exclusions moving forward. Past exclusions will still use 'date_served'. Past
   pending exclusions will still use '__/__/____'
 
+## 1/1/2024
+- app.js (lines 30-104): Implemented cron-job to archive expired exclusion orders.
+  - Added email notifications. 
+  - Set daily task to be run at 1am PST.
+  - Tested and it works great as of 1/1/24.
+
 ## PLANNED CHANGES/FEATURES:
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
@@ -202,7 +208,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   - ✔ New exclusion
   - ❌Changed exclusion
   - ❌Expiring soon
-  - ❌Upon Expiration
+  - ✔ Upon Expiration 1/1/2024
 - **TODO: Fix bug: routes.js: edit_user POST route - password updates, should show
   the user an error if it doesn't match,and break from saving the data, instead of
   potentially crashing the server. (tested 11/9 in prod...and it's a sucky one)
@@ -210,5 +216,5 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
     in the /login route
   - **Add ability for users to reset their password via "forgot password" link.
 
-### Originally created: 11/29/2022; Last edited: 11/22/2023
+### Originally created: 11/29/2022; Last edited: 1/1/2024
  

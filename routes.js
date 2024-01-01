@@ -417,6 +417,7 @@ module.exports = function (app) {
                   : 'days'
               }<br> 
                 Status: ${excl.pending === undefined ? 'Active/Served' : 'Currently Pending'} 
+                ${emailBodies.new_exclusion_end}
                 <p>Sincerely,</p>
                 <p>MTA Exclusions DB</p>`,
               [emailUser.email] // Send email to current user

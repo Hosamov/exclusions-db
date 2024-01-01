@@ -12,8 +12,8 @@ Date.prototype.addDays = function (days) {
 // Compare current date to expiration date and return a boolean value
 function archiveHelper(date) {
   const thisDate = new Date();
-  const currentDate = moment(thisDate).format(); 
-  const expDate = moment(date).format(); 
+  const currentDate = moment(thisDate, "MM/DD/YYYY"); //.format(); 
+  const expDate = moment(date, "MM/DD/YYYY"); //.format();
   return currentDate > expDate; 
 }
 

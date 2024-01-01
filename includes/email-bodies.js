@@ -29,6 +29,12 @@ const emailBodies = {
   new_exclusion_added: `
     <p> This email serves as a notification to inform you that a new exclusion has been added to the MTA Exclusions Database (DB). Please see details below:</p>
     `,
+  new_exclusion_end: `
+    <p>This is an automated email. Please do not respond.</p>`,
+  //* Email body for expired exclusion notification:
+  expired_exclusion: `
+    <p>This email serves as a notification to inform you that the exclusion for the following individual has expired and been archived as of today:</p>
+  `,
 };
 
 module.exports = emailBodies;

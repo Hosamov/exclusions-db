@@ -1,5 +1,7 @@
-const { connect, connection } = require('mongoose');
+const { mongoose, connect, connection } = require('mongoose');
 const { config } = require('dotenv');
+
+mongoose.set('strictQuery', true);
 
 module.exports = () => {
  config(); //invoking the dotenv config here

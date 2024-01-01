@@ -90,29 +90,29 @@ router.get('/home', async (req, res, next) => {
         } else {
           const currentExclusionsArr = []; // Holds unarchived exclusions
           await foundExclusion.forEach((item) => {
-            // Check all unarchived exclusions
+          //   // Check all unarchived exclusions
             if (!item.archived) {
-              //* Verify active or past exclusion using archiveHelper:
-              if (
-                item.exp_date !== 'Invalid date' &&
-                item.exp_date !== 'Infinity' &&
-                item.exp_date !== 'Lifetime' &&
-                item.length !== 'Lifetime'
-              ) {
-                item.archived = archiveHelper(item.exp_date); // Returns Boolean
-              }
+          //     //* Verify active or past exclusion using archiveHelper:
+          //     if (
+          //       item.exp_date !== 'Invalid date' &&
+          //       item.exp_date !== 'Infinity' &&
+          //       item.exp_date !== 'Lifetime' &&
+          //       item.length !== 'Lifetime'
+          //     ) {
+          //       item.archived = archiveHelper(item.exp_date); // Returns Boolean
+          //     }
 
               currentExclusionsArr.push(item);
-              if (item.archived) {
-                // Archive all exclusions due/past due for archive
-                item.save((err) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log(item._id + ' has been archived.');
-                  }
-                });
-              }
+          //     if (item.archived) {
+          //       // Archive all exclusions due/past due for archive
+          //       item.save((err) => {
+          //         if (err) {
+          //           console.log(err);
+          //         } else {
+          //           console.log(item._id + ' has been archived.');
+          //         }
+          //       });
+          //     }
             }
           });
           // Render the correct template:
