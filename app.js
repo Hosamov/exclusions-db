@@ -3,14 +3,12 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
-const memoryStore = require('memorystore')(session); // used with express-session(?)
+// const memoryStore = require('memorystore')(session); // used with express-session(?)
 const cron = require('node-cron');
 
 require('dotenv/config');
 
-
 // Models:
-const Exclusion = require('./models/exclusion');
 const Account = require('./models/account');
 
 // Passport Config
@@ -23,81 +21,13 @@ passport.deserializeUser(Account.deserializeUser());
 require('./initDB')();
 
 // Helpers:
-const archiveHelper = require('./includes/archive-helper');
-const emailBodies = require('./includes/email-bodies');
-const email = require('./emailer');
+const cronJobsHelper = require('./includes/cron-jobs.js');
 
-//TODO: cron-job - Add daily tasks here
-//! Check for expired (today) or soon-expiring exclusions, send emails based on data.
-cron.schedule('0 1 * * *',() => { // Run task at 0100 PST
-// cron.schedule('0 */2 * * * * ',() => { // Run task every 2 minutes
-    console.log('Running scheduled tasks at 01:00 PST');
-    // console.log('Running task every 2 minutes...');
-
-    Exclusion.find({}, async (err, foundExclusion) => { // query all
-      console.log('Running task 1: Checking for expiring exclusion orders...')
-      if (err) {
-        console.log(err);
-      } else {
-        const currentExclusionsArr = []; // Holds unarchived exclusions
-        const emailList = [];
-
-        // Find all users who have opted in to receiving expiration emails:
-        Account.find({ username: { $ne: null } }, (err, foundUsers) => {
-          foundUsers.forEach((user) => {
-            if (user.receiveEmail.expiredExcl)
-              emailList.push({
-                // object containing email and firstName for sending email
-                email: user.username.toString(),
-                firstName: user.first_name.toString(),
-              });
-          });
-          console.log(emailList);
-        });
-
-        await foundExclusion.forEach((item) => {
-          // Check all unarchived exclusions
-          if (!item.archived) {
-            //* Verify active or past exclusion using archiveHelper:
-            if (
-              item.exp_date !== 'Invalid date' &&
-              item.exp_date !== 'Infinity' &&
-              item.exp_date !== 'Lifetime' &&
-              item.length !== 'Lifetime'
-            ) {
-              item.archived = archiveHelper(item.exp_date); // Returns Boolean
-            }
-
-            currentExclusionsArr.push(item);
-            if (item.archived) { // if the item is marked for archive:
-              // Archive all exclusions that have expired
-              item.save((err) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log(item._id + ' has been archived.');
-                  //! Notify applicable users via email:
-                  emailList.forEach((emailUser) => {
-                    email(
-                      'Exclusions DB: Exclusion Order Has Expired',
-                      `<p>Greetings, ${emailUser.firstName}!</p>
-                        ${emailBodies.expired_exclusion}
-                        Name: ${item.last_name}, ${item.first_name}<br> 
-                        <p>Sincerely,</p>
-                        <p>MTA Exclusions DB</p>`,
-                      [emailUser.email] // Send email to current user
-                    ).catch(console.error);
-                  });
-                }
-              });
-            }
-          }
-        });
-      }
-      console.log('Task 1: completed.');
-    })
-  },
-  {
+//* Cron-jobs:
+cron.schedule('0 1 * * *',() => { // Run task at 0100 PST --- 2 minutes test: ('0 */2 * * * * ', () => {})
+    console.log('Running scheduled tasks at 01:00 PST');  // console.log('Running task every 2 minutes');
+    cronJobsHelper();
+  },{
     scheduled: true,
     timezone: 'America/Los_Angeles', 
   }

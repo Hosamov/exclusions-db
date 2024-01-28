@@ -1,12 +1,12 @@
-const passport = require('passport');
-const moment = require('moment-timezone');
-const reCAPTCHA = require('recaptcha2');
+const passport = require("passport");
+const moment = require("moment-timezone");
+const reCAPTCHA = require("recaptcha2");
 
-const Account = require('./models/account');
-const Exclusion = require('./models/exclusion');
+const Account = require("./models/account");
+const Exclusion = require("./models/exclusion");
 
-const email = require('./emailer');
-const emailBodies = require('./includes/email-bodies');
+const email = require("./emailer");
+const emailBodies = require("./includes/email-bodies");
 
 const recaptcha = new reCAPTCHA({
   siteKey: process.env.SITEKEY, // retrieved during setup
@@ -15,17 +15,17 @@ const recaptcha = new reCAPTCHA({
 
 module.exports = function (app) {
   //* Image embed Howto GET route - displays how to embed Google Photos for linking
-  app.get('/home/img_embed_howto', (req, res, next) => {
+  app.get("/home/img_embed_howto", (req, res, next) => {
     if (req.isAuthenticated()) {
-      res.render('./exclusions/image-howto');
+      res.render("./exclusions/image-howto");
     } else {
-      res.redirect('login');
+      res.redirect("login");
     }
   });
 
   //*********** ALL POST ROUTES ************/
   //* Login POST route
-  app.post('/login', (req, res) => {
+  app.post("/login", (req, res) => {
     // Uses passport.js to authenticate user
     const account = new Account({
       username: req.body.username,
@@ -43,7 +43,7 @@ module.exports = function (app) {
           .validateRequest(req)
           .then(() => {
             // If validated, continue with passport authentication process:
-            passport.authenticate('local', { failureRedirect: '/retry_login' })(
+            passport.authenticate("local", { failureRedirect: "/retry_login" })(
               req,
               res,
               () => {
@@ -56,7 +56,7 @@ module.exports = function (app) {
                       if (foundUser.active) {
                         foundUser.loggedIn = true;
                         foundUser.lastLoggedIn = moment(currentDate)
-                          .tz('America/Los_Angeles')
+                          .tz("America/Los_Angeles")
                           .format(); // Update lastLoggedIn
                         await foundUser.save((err) => {
                           if (err) {
@@ -66,14 +66,14 @@ module.exports = function (app) {
                             console.log(
                               `User, ${foundUser.username} has logged in.`
                             );
-                            res.redirect('/home');
+                            res.redirect("/home");
                           }
                         });
                       } else {
                         console.log(
                           `User ${foundUser.username} is not active and cannot login.`
                         );
-                        res.redirect('/unauthorized');
+                        res.redirect("/unauthorized");
                       }
                     }
                   }
@@ -83,15 +83,15 @@ module.exports = function (app) {
           })
           .catch((err) => {
             // If there is a reCAPTCHA error, redirect to /retry_login route
-            console.log('reCAPTCHA was not verified.');
-            res.redirect('/retry_login');
+            console.log("reCAPTCHA was not verified.");
+            res.redirect("/retry_login");
           });
       }
     });
   });
 
   //* Logout POST route https://www.passportjs.org/concepts/authentication/logout/
-  app.post('/logout', (req, res, next) => {
+  app.post("/logout", (req, res, next) => {
     if (req.isAuthenticated()) {
       const loggedInUser = {
         username: req.user.username,
@@ -112,7 +112,7 @@ module.exports = function (app) {
                   console.log(err);
                 } else {
                   console.log(`User, ${loggedInUser.username} has logged out.`);
-                  res.redirect('/');
+                  res.redirect("/");
                 }
               });
             }
@@ -120,12 +120,12 @@ module.exports = function (app) {
         }
       );
     } else {
-      res.redirect('/'); // No need to logout - already logged out...
+      res.redirect("/"); // No need to logout - already logged out...
     }
   });
 
   //* Register POST route (for user registration)
-  app.post('/register', (req, res, next) => {
+  app.post("/register", (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     const userKey = req.body.user_key;
@@ -139,10 +139,10 @@ module.exports = function (app) {
           Account.register({ username: username }, password, (err, account) => {
             if (err) {
               console.log(err);
-              res.redirect('/retry_register');
+              res.redirect("/retry_register");
             } else {
-              passport.authenticate('local')(req, res, () => {
-                console.log('Registration successful.');
+              passport.authenticate("local")(req, res, () => {
+                console.log("Registration successful.");
                 Account.findOne(
                   { username: username },
                   async (err, foundUser) => {
@@ -161,13 +161,13 @@ module.exports = function (app) {
                       // Check if userkey has been inputted, and if it matches criteria
                       if (userKey === process.env.ADMIN_KEY) {
                         //TODO later: change to switch statement
-                        foundUser.role = 'admin';
+                        foundUser.role = "admin";
                         foundUser.active = true;
                       } else if (userKey === process.env.SUPV_KEY) {
-                        foundUser.role = 'supervisor';
+                        foundUser.role = "supervisor";
                         foundUser.active = true;
                       } else if (userKey === process.env.USER_KEY) {
-                        foundUser.role = 'user';
+                        foundUser.role = "user";
                         foundUser.active = true;
                       } else {
                         // Invalid user key/no key entered
@@ -181,20 +181,20 @@ module.exports = function (app) {
                         } else {
                           //* Send registration email to new user:
                           email(
-                            'Successful Registration - Exclusions DB',
+                            "Successful Registration - Exclusions DB",
                             `<p>Congrats, ${firstName}!</p> ${emailBodies.register_body}`,
                             username
                           ).catch(console.error);
                           //* Send registration email to site admin:
                           email(
-                            'New User Registered - Exclusions DB',
+                            "New User Registered - Exclusions DB",
                             `<p>Greetings, Admin!</p> ${emailBodies.new_account_admin} new user: ${foundUser.username} (${foundUser.first_name} ${foundUser.last_name})`,
                             process.env.ADMIN_EMAIL
                           ).catch(console.error);
                           console.log(
                             `New user, ${foundUser.first_name} ${foundUser.last_name} has been registered...`
                           );
-                          res.redirect('/register_success');
+                          res.redirect("/register_success");
                         }
                       });
                     }
@@ -206,16 +206,16 @@ module.exports = function (app) {
         })
         .catch((err) => {
           // If there is a reCAPTCHA error, redirect to /retry_login route
-          res.redirect('/register');
+          res.redirect("/register");
         });
     } else {
       // Registration failure. Redirect to /register route:
-      res.redirect('/register');
+      res.redirect("/register");
     }
   });
 
   //* Edit_user POST route
-  app.post('/edit_user', (req, res, next) => {
+  app.post("/edit_user", (req, res, next) => {
     let passwordError = false; //track if there was an error with updating password
 
     // Edit a registered user from /edit_user GET route
@@ -243,7 +243,8 @@ module.exports = function (app) {
         // First, check if the user has updated their password:
         if (
           foundUser.newPassword === foundUser.confirmedPassword &&
-          foundUser.newPassword !== '' && foundUser.newPassword !== undefined
+          foundUser.newPassword !== "" &&
+          foundUser.newPassword !== undefined
         ) {
           console.log(foundUser.newPassword);
           // https://alto-palo.com/blogs/nodejs-authentication-with-passportjs-passport-local-mongoose/
@@ -255,47 +256,50 @@ module.exports = function (app) {
                 console.log(err);
                 passwordError = true;
               } else {
-                console.log(`Password successfully updated for ${user.username}`)
+                console.log(
+                  `Password successfully updated for ${user.username}`
+                );
               }
             }
           );
         }
         // Post data to user account:
         foundUser.username = userInfo.username;
-        if ( // Check if user account is being activated currently:
+        if (
+          // Check if user account is being activated currently:
           foundUser.active === false &&
-          (userInfo.active === 'on' || userInfo.active === 'true')
+          (userInfo.active === "on" || userInfo.active === "true")
         ) {
           //* Send activation email:
           email(
-            'Account Activated - Exclusions DB',
+            "Account Activated - Exclusions DB",
             `<p>Greetings, ${foundUser.first_name}!</p> 
              ${emailBodies.account_activated_body}`,
             foundUser.username
           ).catch(console.error);
-          foundUser.active = true; 
+          foundUser.active = true;
         }
         foundUser.active =
-          userInfo.active === 'on' || userInfo.active === 'true' ? true : false;
+          userInfo.active === "on" || userInfo.active === "true" ? true : false;
         foundUser.role = userInfo.role;
         foundUser.first_name = userInfo.firstName;
         foundUser.last_name = userInfo.lastName;
         // Collect email notifications settings:
         // Convert all to boolean values
         receiveEmail.newExcl =
-          userInfo.eNewExcl === 'on' || userInfo.eNewExcl === 'true'
+          userInfo.eNewExcl === "on" || userInfo.eNewExcl === "true"
             ? true
             : false;
         receiveEmail.editedExcl =
-          userInfo.eEditedExcl === 'on' || userInfo.eEditedExcl === 'true'
+          userInfo.eEditedExcl === "on" || userInfo.eEditedExcl === "true"
             ? true
             : false;
         receiveEmail.expiresSoon =
-          userInfo.eExpiresSoon === 'on' || userInfo.eExpiresSoon === 'true'
+          userInfo.eExpiresSoon === "on" || userInfo.eExpiresSoon === "true"
             ? true
             : false;
         receiveEmail.expiredExcl =
-          userInfo.eExpiredExcl === 'on' || userInfo.eExpiredExcl === 'true'
+          userInfo.eExpiredExcl === "on" || userInfo.eExpiredExcl === "true"
             ? true
             : false;
 
@@ -303,9 +307,9 @@ module.exports = function (app) {
           if (err) {
             console.log(err);
           } else {
-            console.log('passwordError: ' + passwordError)
-            console.log(foundUser.username + ' has been successfully updated.');
-            res.render('./users/account-success', { user: userInfo });
+            console.log("passwordError: " + passwordError);
+            console.log(foundUser.username + " has been successfully updated.");
+            res.render("./users/account-success", { user: userInfo });
           }
         });
       }
@@ -314,12 +318,12 @@ module.exports = function (app) {
 
   // //* reset_password POST route
   // //! WORKING HERE
-  app.post('/reset_password', async (req, res, next) =>{
-    console.log('Reset Password POST Route reached.')
+  app.post("/reset_password", async (req, res, next) => {
+    console.log("Reset Password POST Route reached.");
   });
 
   //* Add_exclusion POST route
-  app.post('/add_exclusion', async (req, res, next) => {
+  app.post("/add_exclusion", async (req, res, next) => {
     // Add new exclusion data from /add_new_exclusion GET route
     let excl = {
       first_name: req.body.first_name,
@@ -329,8 +333,9 @@ module.exports = function (app) {
       ordinance: req.body.ordinance,
       description: req.body.description,
       detailed_description: req.body.detailed_description,
-      date_served: moment(req.body.date_served).format('YYYY-MM-DD'),
-      date_added: moment().format('MM/DD/YYYY'),
+      date_served: moment(req.body.date_served).format("YYYY-MM-DD"),
+      // https://momentjs.com/timezone/docs/
+      date_added: moment().tz("America/Los_Angeles").format("MM/DD/YYYY"), //TODO: Testing
       exp_date: req.body.exp_date,
       length: req.body.length, //Note: is converted to a string for 'Lifetime'
       other_length: req.body.other_length,
@@ -352,13 +357,13 @@ module.exports = function (app) {
       date.setDate(date.getDate() + days);
       return date;
     };
-    
+
     const dateServed = new Date(excl.date_served);
     const dateServedPlus = dateServed.addDays(1);
     console.log(dateServed, dateServedPlus);
 
     // Checks for which 'length' form field used:
-    if (excl.other_length !== null && excl.other_length !== '') {
+    if (excl.other_length !== null && excl.other_length !== "") {
       excl.exp_date = dateServedPlus.addDays(parseInt(excl.other_length));
     } else {
       excl.exp_date = dateServedPlus.addDays(parseInt(excl.length)); // Add days excl.date_served
@@ -383,19 +388,19 @@ module.exports = function (app) {
         {
           first_name: excl.first_name,
           last_name: excl.last_name,
-          dob: moment(excl.dob).format('MM/DD/YYYY'),
+          dob: moment(excl.dob).format("MM/DD/YYYY"),
           other_info: excl.other_info,
           ordinance: excl.ordinance,
           description: excl.description,
           detailed_description: excl.detailed_description,
-          date_served: moment(excl.date_served.toString()).format('MM/DD/YYYY'),
+          date_served: moment(excl.date_served.toString()).format("MM/DD/YYYY"),
           date_added: excl.date_added,
-          exp_date: moment(excl.exp_date.toString()).format('MM/DD/YYYY'), // convert to string due to "Lifetime"
-          length: excl.length === 'Lifetime' ? Infinity : excl.length,
+          exp_date: moment(excl.exp_date.toString()).format("MM/DD/YYYY"), // convert to string due to "Lifetime"
+          length: excl.length === "Lifetime" ? Infinity : excl.length,
           img_url: excl.img_url,
           signature: excl.signature,
           pending:
-            excl.pending === 'on' || excl.pending === 'true' ? true : false,
+            excl.pending === "on" || excl.pending === "true" ? true : false,
           archived: false,
         },
       ],
@@ -406,31 +411,35 @@ module.exports = function (app) {
           //* Send new exclusion added success email to all applicable users:
           emailList.forEach((emailUser) => {
             email(
-              'Exclusions DB: New Exclusion Order Added',
+              "Exclusions DB: New Exclusion Order Added",
               `<p>Greetings, ${emailUser.firstName}!</p>
                 ${emailBodies.new_exclusion_added}
                 Name: ${excl.last_name}, ${excl.first_name}<br> 
                 Date: ${excl.date_added}<br>
                 Exclusion Length: ${excl.length} ${
-                excl.length == 'lifetime' || excl.length == 'infinity'
-                  ? ''
-                  : 'days'
+                excl.length == "lifetime" || excl.length == "infinity"
+                  ? ""
+                  : "days"
               }<br> 
-                Status: ${excl.pending === undefined ? 'Active/Served' : 'Currently Pending'} 
+                Status: ${
+                  excl.pending === undefined
+                    ? "Active/Served"
+                    : "Currently Pending"
+                } 
                 ${emailBodies.new_exclusion_end}
                 <p>Sincerely,</p>
                 <p>MTA Exclusions DB</p>`,
               [emailUser.email] // Send email to current user
             ).catch(console.error);
           });
-          res.redirect('/home');
+          res.redirect("/home");
         }
       }
     );
   });
 
   //* Edit_exclusion POST route
-  app.post('/edit_exclusion', (req, res, next) => {
+  app.post("/edit_exclusion", (req, res, next) => {
     // Add a new exclusion from /edit_exclusion GET route
     let excl = {
       id: req.body.id,
@@ -441,7 +450,7 @@ module.exports = function (app) {
       ordinance: req.body.ordinance,
       description: req.body.description,
       detailed_description: req.body.detailed_description,
-      date_served: moment(req.body.date_served).format('YYYY-MM-DD'),
+      date_served: moment(req.body.date_served).format("YYYY-MM-DD"),
       exp_date: req.body.exp_date,
       length: req.body.length,
       img_url: req.body.img_url,
@@ -475,34 +484,34 @@ module.exports = function (app) {
           // Post data to exclusion:
           foundExclusion.first_name = excl.first_name;
           foundExclusion.last_name = excl.last_name;
-          (foundExclusion.dob = moment(excl.dob).format('MM/DD/YYYY')),
+          (foundExclusion.dob = moment(excl.dob).format("MM/DD/YYYY")),
             (foundExclusion.other_info = excl.other_info);
           foundExclusion.ordinance = excl.ordinance;
           foundExclusion.description = excl.description;
           foundExclusion.detailed_description = excl.detailed_description;
           foundExclusion.date_served = moment(
             excl.date_served.toString()
-          ).format('MM/DD/YYYY');
+          ).format("MM/DD/YYYY");
           foundExclusion.exp_date = moment(excl.exp_date.toString()).format(
-            'MM/DD/YYYY'
+            "MM/DD/YYYY"
           );
           foundExclusion.length = excl.length;
           foundExclusion.img_url = excl.img_url;
           foundExclusion.signature = excl.signature;
           foundExclusion.super_title = excl.super_title;
           (foundExclusion.pending =
-            excl.pending === 'on' || excl.pending === 'true' ? true : false),
+            excl.pending === "on" || excl.pending === "true" ? true : false),
             await foundExclusion.save((err) => {
               if (err) {
                 console.log(err);
               } else {
                 console.log(
                   foundExclusion.first_name +
-                    ' ' +
+                    " " +
                     foundExclusion.last_name +
-                    ' has been successfully updated.'
+                    " has been successfully updated."
                 );
-                res.redirect('/home');
+                res.redirect("/home");
               }
             });
         }
