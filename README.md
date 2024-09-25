@@ -225,13 +225,18 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 
 - Fix bug: date was displaying the next day while hosted. incorporated 'moment-timezone' library to set proper timezone (see routes/home.js, and /routes.js)
 
+## 9/25/2024
+
+- Added new Ordinances.json data under /includes that includes (initial) data
+  for violations people may commit (RCWs and Policy).
+
 ## PLANNED CHANGES/FEATURES:
 
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
 - Add search feature to find active exclusions easier
 - Add section for minimum exclusion lengths (exclusions-criteria GET route)
-
+- **In second page of exclusion, add all past violations/history automatically for that individual.
 
 ## TODOS:
 
@@ -248,4 +253,4 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
     in the /login route
   - \*\*Add ability for users to reset their password via "forgot password" link.
 
-### Originally created: 11/29/2022; Last edited: 1/28/2024
+### Originally created: 11/29/2022; Last edited: 9/25/2024
