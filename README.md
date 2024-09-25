@@ -221,7 +221,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Cleanup - create cron-jobs.js in /includes to house all cron jobs, which are
   called in app.js. This helper function is called 'cronJobsHelper'
 
-# 1/28/2024
+## 1/28/2024
 
 - Fix bug: date was displaying the next day while hosted. incorporated 'moment-timezone' library to set proper timezone (see routes/home.js, and /routes.js)
 
@@ -231,7 +231,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Add sort by expiring soon.
 - Add search feature to find active exclusions easier
 - Add section for minimum exclusion lengths (exclusions-criteria GET route)
--
+
 
 ## TODOS:
 
@@ -248,4 +248,4 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
     in the /login route
   - \*\*Add ability for users to reset their password via "forgot password" link.
 
-### Originally created: 11/29/2022; Last edited: 1/1/2024
+### Originally created: 11/29/2022; Last edited: 1/28/2024
