@@ -66,6 +66,9 @@ block content
             em (1040)
           .tooltiptext Max characters: 2040
         textarea.form-control.detailed_description(id="detailed_description" name="detailed_description" rows='6' maxLength="2040" placeholder="Insert exclusion notes here (Remember: dates, times, lengths, violations). This is the exclusion history for MTA's records." required)
+        each exclusion in exclusions 
+          h2=first_name
+          p=exclusion.last_name
       .form-exclusion-section
         .form-element
           label.form-label(for='length') * Exclusion Length

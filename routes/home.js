@@ -1,17 +1,17 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const moment = require("moment-timezone");
+const moment = require('moment-timezone');
 
 new Date();
 
 // Models:
-const Exclusion = require("../models/exclusion");
+const Exclusion = require('../models/exclusion');
 
 // Helpers:
-const archiveHelper = require("../includes/archive-helper");
+const archiveHelper = require('../includes/archive-helper');
 
 //* Home GET route (for logged-in users) - Displays list of all active exclusions
-router.get("/home", async (req, res, next) => {
+router.get('/home', async (req, res, next) => {
   if (req.isAuthenticated()) {
     const thisUser = {
       username: req.user.username,
@@ -22,8 +22,8 @@ router.get("/home", async (req, res, next) => {
     let date = new Date();
     // Set today's date, set correct timezone:
     let today = moment(date.toString())
-      .tz("America/Los_Angeles")
-      .format("MM-DD-YYYY");
+      .tz('America/Los_Angeles')
+      .format('MM-DD-YYYY');
 
     let filter = req.query.filter;
     let srt = req.query.srt;
@@ -33,35 +33,35 @@ router.get("/home", async (req, res, next) => {
     //! Note: filter in user-home.pug template
     switch (filter) {
       //* Cases: all, active, limited, lifetime, pending
-      case "all": // active and pending
+      case 'all': // active and pending
         query = {};
         break;
-      case "active":
+      case 'active':
         query = {
           $and: [{ pending: { $ne: true } }],
         };
         break;
-      case "limited":
+      case 'limited':
         // filter query string for NOT 'infinity' or 'lifetime'
         query = {
           $and: [
-            { length: { $ne: "Infinity" } },
-            { length: { $ne: "Lifetime" } },
-            { date_served: { $ne: "Invalid date" } },
+            { length: { $ne: 'Infinity' } },
+            { length: { $ne: 'Lifetime' } },
+            { date_served: { $ne: 'Invalid date' } },
           ],
         };
         break;
-      case "lifetime":
+      case 'lifetime':
         // filter query string for 'infinity' or 'lifetime'
         query = {
           $or: [
-            { length: { $eq: "Infinity" } },
-            { length: { $eq: "Lifetime" } },
+            { length: { $eq: 'Infinity' } },
+            { length: { $eq: 'Lifetime' } },
           ],
           $and: [{ pending: { $ne: true } }],
         };
         break;
-      case "pending":
+      case 'pending':
         query = {
           $and: [{ pending: { $eq: true } }],
         };
@@ -72,7 +72,7 @@ router.get("/home", async (req, res, next) => {
 
     // Array of comparison values for sorting:
     //? Keep in future iterations?
-    sortArr = ["last_name", "first_name", "length", "exp_date"];
+    sortArr = ['last_name', 'first_name', 'length', 'exp_date'];
 
     let sortItem = sortArr[0]; // Initialize to 'last_name'
 
@@ -83,7 +83,7 @@ router.get("/home", async (req, res, next) => {
     if (
       thisUser.active &&
       thisUser.role !== null &&
-      thisUser.role !== "inactive"
+      thisUser.role !== 'inactive'
     ) {
       // First, ensure current user is active
       Exclusion.find(query, async (err, foundExclusion) => {
@@ -120,7 +120,7 @@ router.get("/home", async (req, res, next) => {
           });
           // Render the correct template:
           if (foundExclusion) {
-            res.render("./users/user-home", {
+            res.render('./users/user-home', {
               exclusions: currentExclusionsArr, // Display current exclusions only
               user: thisUser,
               filter: filter,
@@ -128,22 +128,22 @@ router.get("/home", async (req, res, next) => {
               date: today, // today's date
             });
           } else {
-            res.redirect("/error");
+            res.redirect('/error');
           }
         }
       }).sort(sortItem); // Sort list in ascending order
     } else {
-      res.redirect("/unauthorized");
+      res.redirect('/unauthorized');
     }
   } else {
-    res.redirect("/login");
+    res.redirect('/login');
   }
 });
 
 //* Add_new_exclusion GET route
 //* Renders an exclusion creation form
 //* Note: route name due to params (see next routes)
-router.get("/add_new_exclusion", (req, res, next) => {
+router.get('/add_new_exclusion', (req, res, next) => {
   if (req.isAuthenticated()) {
     const thisUser = {
       username: req.user.username,
@@ -154,28 +154,31 @@ router.get("/add_new_exclusion", (req, res, next) => {
     };
     // Authorized: Admin or supervisor, if active
     if (
-      thisUser.role === "admin" ||
-      (thisUser.role === "supervisor" && thisUser.active)
+      thisUser.role === 'admin' ||
+      (thisUser.role === 'supervisor' && thisUser.active)
     ) {
       Exclusion.find({}, (err, exclusions) => {
         if (err) {
           console.log(err);
           next(err);
         } else {
-          res.render("./exclusions/new-exclusion", { user: thisUser });
+          res.render('./exclusions/new-exclusion', {
+            exclusions: exclusions, // pass exclusions to help find other existing exclusion data (see template)
+            user: thisUser,
+          });
         }
       });
     } else {
-      res.redirect("/unauthorized");
+      res.redirect('/unauthorized');
     }
   } else {
-    res.redirect("/");
+    res.redirect('/');
   }
 });
 
 //* Home/selected exclusion GET route -
 //* Renders selected exclusion
-router.get("/home/:exclusion_id", (req, res, next) => {
+router.get('/home/:exclusion_id', (req, res, next) => {
   const exclusionId = req.params.exclusion_id; // Find user based on ID
   if (req.isAuthenticated()) {
     const thisUser = {
@@ -187,14 +190,14 @@ router.get("/home/:exclusion_id", (req, res, next) => {
     if (
       thisUser.active &&
       thisUser.role !== null &&
-      thisUser.role !== "inactive"
+      thisUser.role !== 'inactive'
     ) {
       Exclusion.findOne({ _id: { $eq: exclusionId } }, (err, exclusion) => {
         if (err) {
           console.log(err);
           next(err);
         } else {
-          res.render("./exclusions/exclusion", {
+          res.render('./exclusions/exclusion', {
             exclusion: exclusion,
             id: exclusionId,
             user: thisUser,
@@ -202,23 +205,23 @@ router.get("/home/:exclusion_id", (req, res, next) => {
         }
       });
     } else {
-      res.redirect("/unauthorized");
+      res.redirect('/unauthorized');
     }
   } else {
-    res.redirect("/");
+    res.redirect('/');
   }
 });
 
 //* Edit exclusion GET route
 //* Renders edit form for selected exclusion
-router.get("/home/:exclusion/edit", (req, res, next) => {
+router.get('/home/:exclusion/edit', (req, res, next) => {
   const exclusion_id = req.params.exclusion;
   console.log(exclusion_id);
   if (req.isAuthenticated()) {
     // Authorized: Admin & supervisor, if active
     if (
-      req.user.role === "admin" ||
-      (req.user.role === "supervisor" && req.user.active === true)
+      req.user.role === 'admin' ||
+      (req.user.role === 'supervisor' && req.user.active === true)
     ) {
       Exclusion.findOne(
         { _id: { $eq: exclusion_id } },
@@ -228,13 +231,13 @@ router.get("/home/:exclusion/edit", (req, res, next) => {
           } else {
             const exclDates = {
               exclDate: moment(foundExclusion.date_served.toString()).format(
-                "YYYY-MM-DD"
+                'YYYY-MM-DD'
               ),
               dobDate: moment(foundExclusion.dob.toString()).format(
-                "YYYY-MM-DD"
+                'YYYY-MM-DD'
               ),
             };
-            res.render("./exclusions/edit-exclusion", {
+            res.render('./exclusions/edit-exclusion', {
               exclusion: foundExclusion,
               user: req.user,
               dates: exclDates,
@@ -244,22 +247,22 @@ router.get("/home/:exclusion/edit", (req, res, next) => {
         }
       );
     } else {
-      res.redirect("/unauthorized");
+      res.redirect('/unauthorized');
     }
   } else {
-    res.redirect("/unauthorized");
+    res.redirect('/unauthorized');
   }
 });
 
 //* Delete exclusion GET route
 //* Redirects to /home GET route after deleting selected exclusion
-router.get("/home/:exclusion/delete", async (req, res, next) => {
+router.get('/home/:exclusion/delete', async (req, res, next) => {
   if (req.isAuthenticated()) {
     const exclusion_id = req.params.exclusion;
     // Authorized: Admin & Supervisor, if active
     if (
-      req.user.role === "admin" ||
-      (req.user.role === "supervisor" && req.user.active)
+      req.user.role === 'admin' ||
+      (req.user.role === 'supervisor' && req.user.active)
     ) {
       await Exclusion.deleteOne({ _id: { $eq: exclusion_id } }) // locate by id
         .then(() => {
@@ -271,36 +274,36 @@ router.get("/home/:exclusion/delete", async (req, res, next) => {
           next(err);
         });
     } else {
-      res.redirect("/unauthorized");
+      res.redirect('/unauthorized');
     }
   } else {
-    res.redirect("/");
+    res.redirect('/');
   }
 });
 
 //* /user/:users/delete_success GET route
 //* Render exclusions/delete-success template
-router.get("/home/:id/delete_success", (req, res, next) => {
+router.get('/home/:id/delete_success', (req, res, next) => {
   if (req.isAuthenticated()) {
     const exclusionId = req.params.id;
     // Make accessible to admin user only
-    if (req.user.role === "admin") {
-      res.render("./exclusions/delete-success", {
+    if (req.user.role === 'admin') {
+      res.render('./exclusions/delete-success', {
         id: exclusionId,
         user: req.user,
       });
     }
   } else {
-    res.redirect("/unauthorized");
+    res.redirect('/unauthorized');
   }
 });
 
 //* Home/ExclusionId/Archive GET route
 //* Moves exclusion from main list to archived list
-router.get("/home/:exclusion_id/archive", (req, res, next) => {
+router.get('/home/:exclusion_id/archive', (req, res, next) => {
   const exclId = req.params.exclusion_id;
   if (req.isAuthenticated()) {
-    if (req.user.role === "admin") {
+    if (req.user.role === 'admin') {
       Exclusion.findOne({ _id: { $eq: exclId } }, (err, foundExclusion) => {
         if (!foundExclusion.archived) {
           foundExclusion.archived = true;
@@ -310,26 +313,27 @@ router.get("/home/:exclusion_id/archive", (req, res, next) => {
               console.log(err);
             } else {
               console.log(
-                "Exclusion for " + exclId + " successfully archived."
+                'Exclusion for ' + exclId + ' successfully archived.'
               );
-              res.redirect("/archive");
+              res.redirect('/archive');
             }
           });
         }
       });
     } else {
-      res.redirect("/unauthorized");
+      res.redirect('/unauthorized');
     }
   } else {
-    res.redirect("/");
+    res.redirect('/');
   }
 });
 
 /* Exclusions-data GET route
 //* Displays a list of criteria for issuing exclusions */
-router.get("/exclusions_data", (req, res, next) => {
+// *! Note: Work in progress.
+router.get('/exclusions_data', (req, res, next) => {
   if (req.isAuthenticated()) {
-    res.render("./exclusions/exclusions-criteria", {
+    res.render('./exclusions/exclusions-criteria', {
       user: req.user,
     });
   }
