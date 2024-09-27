@@ -78,7 +78,7 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
   active exclusion is being archived.
 - /home/archive - renders list of individuals who have previously been served an
   exclusion order, with the violations.
-  /exclusions_data - _WORKING_ renders list of all excludable offenses, with
+  /exclusions*data - \_WORKING* renders list of all excludable offenses, with
   minimum suggested exclusion lengths.
 
 ### Users GET Routes
@@ -230,13 +230,24 @@ MongoDB/Mongoose. Used for tracking individuals who are excluded from a service.
 - Added new Ordinances.json data under /includes that includes (initial) data
   for violations people may commit (RCWs and Policy).
 
+## 9/26/2024
+
+- Added search-past.js to handle events in new-exclusion.pug and
+  exit-exclusion.pug (/add_new_exclusion & .../edit, respectively). Should work
+  in a way that updates the description of the current exclusion based on any
+  past data (page 2 of the order).
+  - This should update when the first/last name are added. The script should
+    take the data passed to the pug template and append only what is needed as
+    far as description, ordinance, date, length...
+  - Users should be able to append what data is necessary, easily.
+
 ## PLANNED CHANGES/FEATURES:
 
 - Include list of RCWs/Policy points to choose from during exclusion creation process.
 - Add sort by expiring soon.
 - Add search feature to find active exclusions easier
 - Add section for minimum exclusion lengths (exclusions-criteria GET route)
-- **In second page of exclusion, add all past violations/history automatically for that individual.
+- \*\*In second page of exclusion, add all past violations/history automatically for that individual.
 
 ## TODOS:
 
