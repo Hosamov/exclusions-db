@@ -166,6 +166,11 @@ router.get('/add_new_exclusion', (req, res, next) => {
             exclusions: exclusions, // pass exclusions to help find other existing exclusion data (see template)
             user: thisUser,
           });
+          //TODO: Create a prompt template to render a list of all prev excluded individuals
+          // res.render('./exclusions/new-exclusion-prompt', {
+          //   exclusions: exclusions, // pass exclusions to help find other existing exclusion data (see template)
+          //   user: thisUser,
+          // });
         }
       });
     } else {

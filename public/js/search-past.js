@@ -2,38 +2,52 @@
  ** Check for person of the same name (first & last) and display all previous
  ** exclusion information.
  */
-const firstName = document.getElementById('first_name');
-const lastName = document.getElementById('last_name');
-const descriptionData = document.querySelector('.description-data');
+const exclList = document.querySelector('.list');
+const mainContainer = document.querySelector('.main-container');
 
-function showData(list1, list2) {
-  descriptionData.innerHTML = ''; //Set descriptionData to empty string to remove any data previously displayed
+function showData(list) {
+  exclList.innerHTML = ''; //Set descriptionData to empty string to remove any data previously displayed
 
   //Loop over the list parameter
-  for (let i = 0; i < list1.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     //List all students from data.js
     if (i >= startIndex && i < endIndex) {
       //Using insertAdjacentHTML() method, dynamically add student info to index.html
-      descriptionData.insertAdjacentHTML(
+      exclList.insertAdjacentHTML(
         'beforeend',
-        `<h1>HELLO: ${list1}</h1>
+        `<h1>${list}</h1>
         `
       );
     }
   }
 }
 
-function searchPage(list1, list2) {
+function searchPage(list) {
+  mainContainer.insertAdjacentHTML(
+    'afterbegin',
+    `
+      <div class="form-search-section">
+        <label for="search" class="exclusion-search">
+          <input id="search" placeholder="Search by name..." value="">
+          <button type="button" class="submit-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </label>
+      </div>
+    `
+  );
 
-  firstName.addEventListener('keyup', (e) => {
+  //initialize variables for event listener
+  const searchBar = mainContainer.querySelector('#search');
+  const searchBtn = mainContainer.querySelector('.submit-button');
+
+  searchBtn.addEventListener('click', (e) => { //target the search button
+    filterData(list);
+  });
+
+  searchBar.addEventListener('keyup', (e) => {
     //target firstName field
-    filterData(list1);
+    filterData(list);
   });
 
-  lastName.addEventListener('keyup', (e) => {
-    //target lastName field
-    filterData(list2);
-  });
 }
 
 /*
@@ -41,31 +55,26 @@ Filter Search input
 */
 function filterData(list) {
   //call list parameter
-  const searchInputValueFName = firstName.value.toLowerCase();
-  const searchInputValueLName = lastName.value.toLowerCase();
-  let filteredFirstNameList = []; //Create a new array to hold the filtered results, below
-  let filteredLastNameList = [];
+  const searchInputValue = mainContainer.querySelector('#search').value.toLowerCase(); //Target input id of 'search' and convert its value to lower case
+  let filteredList = []; //Create a new array to hold the filtered results, below
 
   for (let i = 0; i < list.length; i++) {
-    const firstNameValue = `${list[i].first_name}`.toLowerCase(); //concatenate first and last name of students on the list and convert names to lower case
-    const lastNameValue = `${list[i].last_name}`.toLowerCase();
+    const fullName = `${list[i].name.first} ${list[i].name.last}`.toLowerCase(); //concatenate first and last name of students on the list and convert names to lower case
     //check to see if the full name matches any or all of the search input
-    if (firstNameValue.includes(searchInputValueFName)) {
-      filteredFirstNameList.push(list[i]);
-    }
-
-    if (lastNameValue.includes(searchInputValueLName)) {
-      filteredLastNameList.push(list[i]);
+    if (fullName.includes(searchInputValue)) {
+      filteredList.push(list[i]); //add it to filteredList array
     }
   }
 
-  if (!filteredFirstNameList.length) {
+  if (!filteredList.length) {
     //Check to see if there are no matches
-    descriptionData.innerHTML = '<h1>No results found.</h1>'; //let the user know
+    exclList.innerHTML =
+      '<p><strong>No results found for your search query.</strong></p>'; //let the user know
+    console.log('no exclusion results found.');
   } else {
-    showData(filteredFirstnameList, filteredLastNameList); //otherwise, send filteredList array to the showPage function
+    showData(filteredList); //otherwise, send filteredList array to the showPage function
   }
 }
 
-showData('', '');
-searchPage('', '');
+// showData('', '');
+// searchPage();

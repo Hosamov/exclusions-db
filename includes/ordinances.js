@@ -1,4 +1,4 @@
-{
+const ordinances = {
   "RCW 9.91.025": {
     "(a)": {
       "description": "Smokes or carries a lighted or smoldering cigar, or cigarette, unless he or she is smoking in an area designated and authorized by the transit authority",

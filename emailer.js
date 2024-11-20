@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 //* EMAILER
 async function email(subject, emailBody, toEmail) {
   let transporter = nodemailer.createTransport({
-    host: 'pcluster08.stablehost.com', // backyarddev.io email
+    host: 'mail.backyarddev.io', // stablehost: pcluster08.stablehost.com. backyarddev.io email
     port: 465,
     secure: true, // use TLS
     auth: {
